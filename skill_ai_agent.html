@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xóa Mù Skill AI Agent - Bách Khoa Toàn Thư</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .content-scroll { max-height: 70vh; overflow-y: auto; padding-right: 1.5rem; margin-top: 0.5rem; text-align: justify; }
+        .content-scroll p { margin-bottom: 1.5rem; line-height: 1.8; font-size: 1.1rem; color: var(--text-main); text-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .detail-card { background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); padding: 1.8rem; border-radius: 24px; margin-bottom: 1.8rem; box-shadow: var(--shadow); border-left: 6px solid var(--primary); color: var(--text-main); }
+        .detail-card h4 { margin-bottom: 1rem; color: #ffffff; font-size: 1.3rem; font-weight: 800; text-transform: uppercase; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .image-side-real { position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); background: rgba(255,255,255,0.1); height: auto; border: 1px solid var(--glass-border); padding: 10px; }
+        .image-side-real img { width: 100%; display: block; border-radius: 14px; }
+        .module-indicator { padding: 8px 18px; background: rgba(255,255,255, 0.2); color: #fff; border-radius: 30px; font-size: 0.85rem; font-weight: 800; margin-bottom: 20px; display: inline-block; border: 1px solid rgba(255,255,255,0.4); text-shadow: 0 2px 4px rgba(0,0,0,0.2); backdrop-filter: blur(10px); }
+        .benefit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+        .benefit-item { background: var(--glass-bg); backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); padding: 2rem; border-radius: 24px; box-shadow: var(--shadow); border-top: 5px solid var(--secondary); transition: transform 0.3s; color: var(--text-main); }
+        .benefit-item h4 { color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.2); margin-bottom: 0.5rem; }
+        .benefit-item:hover { transform: translateY(-5px); background: rgba(255,255,255,0.2); }
+        .bullet-list { list-style: none; padding-left: 0; }
+        .bullet-list li { position: relative; padding-left: 1.5rem; margin-bottom: 0.8rem; line-height: 1.6; color: var(--text-main); font-weight: 500;}
+        .bullet-list li::before { content: "➜"; position: absolute; left: 0; color: #fff; font-weight: 900; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        
+        .pdf-image { border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); width: 100%; object-fit: contain; }
+        .slide-content.side-by-side { max-width: 1400px; width: 100%; }
+        
+        /* Caching images to load instantly */
+        .preload { display: none; }
+    </style>
+</head>
+<body class="light-theme">
+    <div id="app">
+        <header class="app-header">
+            <div class="logo"><span class="bolt">⚡</span><span class="brand">ANTI GRAVITY <span class="event">SKILL AI AGENT</span></span></div>
+            <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+            <div class="page-count"><span id="current-slide-num">1</span> / <span id="total-slides-num">14</span></div>
+        </header>
+
+        <a href="events.html" style="position: absolute; top: 4.5rem; left: 2rem; z-index: 1000; color: #fff; font-weight: 700; text-decoration: none; padding: 0.5rem 1rem; border-radius: 8px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.4); text-shadow: 0 2px 4px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 0.5rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            QUAY LẠI TRANG CHỦ
+        </a>
+        <main class="slide-container" id="slide-wrapper">
+            
+            <!-- SLIDE 1: SPLASH -->
+            <section class="slide active">
+                <div class="slide-content side-by-side">
+                    <div class="text-side" style="padding-right: 2rem;">
+                        <span class="info-badge" style="padding: 0.4rem 1.2rem; font-size: 0.75rem;">CẨM NANG VẬN HÀNH KỸ THUẬT SỐ</span>
+                        <h1 class="gradient-text" style="font-size: 3.2rem; line-height: 1.1; margin-bottom: 0.8rem;">Hướng Dẫn Kỹ Năng Cho AI Agent</h1>
+                        <p class="subtitle" style="font-size: 1.15rem; line-height: 1.6; color: #fff;">Chào bạn! Chắc hẳn bạn đã quen thuộc với việc chat cùng AI. Nhưng hôm nay, chúng ta sẽ làm quen với một khái niệm mạnh mẽ hơn: AI Agent (Trợ Lý AI Hành Động).</p>
+                        <p style="font-size: 1.1rem; line-height: 1.6;">Tài liệu này hướng dẫn bạn cách hiểu và tạo ra "Sổ tay Kỹ năng" (Skill) để giao việc cho AI tự động bấm máy và lướt web thay bạn.</p>
+                        <div style="margin-top: 2.5rem;">
+                            <button class="nav-btn next-trigger" onclick="document.getElementById('next-btn').click()" style="padding: 1rem 3.5rem; font-size: 1.1rem; min-width: 200px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">KHÁM PHÁ NGAY</button>
+                        </div>
+                    </div>
+                    <div class="image-side" style="background: rgba(255,255,255,0.2);">
+                        <img src="/images/skill_pdf/page_1_img_0.jpeg" alt="Cover Image" class="pdf-image">
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 2: 1. Sự Khác Biệt Giữa Chatbot và AI Agent -->
+            <section class="slide">
+                <div class="slide-content centerpiece">
+                    <span class="module-indicator">PHẦN 1</span>
+                    <h2>Sự Khác Biệt Giữa Chatbot và AI Agent</h2>
+                    <div class="content-scroll" style="max-width: 950px; margin: auto;">
+                        <p>Trước tiên, hãy hiểu rõ sự khác nhau giữa hạch toán thụ động và tác nhân hành động:</p>
+                        <div class="benefit-grid" style="margin-top: 2rem;">
+                            <div class="benefit-item">
+                                <h4>💬 Chatbot (như ChatGPT thường)</h4>
+                                <p style="margin-bottom: 1rem;"><strong>Biết ➜ Trả lời.</strong></p>
+                                <p>Bạn hỏi, AI trả lời. Giống như một quyển từ điển sống, hiểu biết mọi thứ nhưng không tự làm gì cả.</p>
+                            </div>
+                            <div class="benefit-item">
+                                <h4>🤖 AI Agent (AI Hành Động)</h4>
+                                <p style="margin-bottom: 1rem;"><strong>Biết ➜ Lập kế hoạch ➜ Hành động ➜ Báo cáo.</strong></p>
+                                <p>Có thể tự lên mạng, mở phần mềm, tự click chuột, gõ bàn phím và làm việc thay cho bạn.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 3: 2. Năng Lực (Khung Não) và Kỹ Năng -->
+            <section class="slide">
+                <div class="slide-content side-by-side">
+                    <div class="text-side">
+                        <span class="module-indicator">PHẦN 2</span>
+                        <h2>Năng Lực Chuyên Tu & Kỹ Năng</h2>
+                        <div class="content-scroll">
+                            <p>Khi bạn thuê một nhân viên AI, bạn cần phân biệt hai thứ sau:</p>
+                            <div class="detail-card">
+                                <h4>🧠 Năng Lực Cốt Lõi (AI Model)</h4>
+                                <p>Đây giống như nhận nhân viên cầm Bằng Tốt Nghiệp Loại Ưu (Gemini, GPT-4). Nhân viên rất thông minh nhưng nếu không có "sổ tay hướng dẫn" của công ty, họ sẽ không biết truy cập phần mềm nào, lưu file ở đâu.</p>
+                            </div>
+                            <div class="detail-card">
+                                <h4>📓 Kỹ Năng Thực Thi (Skill / SOP)</h4>
+                                <p>Đây chính là Sổ tay nội bộ. Dạy AI: "Vào web này, click nút kia, đặt tên file thế này, xong thì báo qua Zalo". AI cần truy cập mạng lấy số liệu thật làm việc chính xác thay vì đoán mò.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image-side" style="background: rgba(255,255,255,0.2);">
+                        <img src="/images/skill_pdf/page_3_img_1.jpeg" alt="Năng Lực và Kỹ Năng" class="pdf-image">
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 4: Cấu Trúc Sổ Tay Kỹ Năng -->
+            <section class="slide">
+                <div class="slide-content centerpiece">
+                    <span class="module-indicator">PHẦN 3</span>
+                    <h2>Cấu Trúc Của Một Trang "Sổ Tay Kỹ Năng"</h2>
+                    <div class="content-scroll" style="max-width: 950px; margin: auto;">
+                        <p>Bất kỳ Kỹ năng nào cho AI cũng bao gồm 2 phần: Dành cho máy và Dành cho bạn.</p>
+                        <div class="grid-2">
+                            <div class="detail-card">
+                                <h4>💻 A. Dành cho máy tính (Code)</h4>
+                                <p>Phần lập trình viên cài đặt (giống "cánh tay" của AI). Nhiệm vụ mở mạng, click, lưu tập tin.</p>
+                            </div>
+                            <div class="detail-card">
+                                <h4>📄 B. Dành cho Bạn & AI (Sổ Tay/Mô tả)</h4>
+                                <p>Rất Quan Trọng! Đây là tờ giấy A4 giúp AI đọc để lập kế hoạch:</p>
+                                <ul class="bullet-list">
+                                    <li><strong>Tên quy trình (Tên Skill):</strong> Nhắc đến tên AI biết ngay việc.</li>
+                                    <li><strong>Điều kiện làm việc (Mô tả):</strong> "Khi cần đăng ảnh thì dùng trang này".</li>
+                                    <li><strong>Đầu vào (Vật tư - Tham số):</strong> Những thông tin AI cần (VD: Nội dung, ảnh gốc).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 5: 5 Bước Dạy Kỹ Năng Mới -->
+            <section class="slide">
+                <div class="slide-content centerpiece">
+                    <span class="module-indicator">PHẦN 4</span>
+                    <h2>Năm Bước Dạy Kỹ Năng Mới Cho Trợ Lý (VD: Đăng Facebook)</h2>
+                    <div class="content-scroll" style="max-width: 1000px; margin: auto;">
+                        <p>Làm thế nào để tạo Kỹ năng tự động đăng Facebook? Đây là 5 bước đơn giản được minh họa bằng sơ đồ thực tế.</p>
+                        
+                        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.6rem; margin-top: 1rem;">
+                            <!-- B1 -->
+                            <div style="background: #3ba3f6; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 700; text-align: center; width: 80%; max-width: 450px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.05rem;">
+                                Bước 1: Mục Tiêu - Bạn muốn AI làm gì?
+                            </div>
+                            <div style="color: #fff; font-size: 1.2rem; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));">⬇</div>
+                            <!-- B2 -->
+                            <div style="background: #3ba3f6; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 700; text-align: center; width: 80%; max-width: 450px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.05rem;">
+                                Bước 2: Viết Mã Lệnh - Dành cho Lập trình viên
+                            </div>
+                            <div style="color: #fff; font-size: 1.2rem; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));">⬇</div>
+                            <!-- B3 -->
+                            <div style="background: #3ba3f6; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 700; text-align: center; width: 80%; max-width: 450px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.05rem; line-height: 1.4;">
+                                Bước 3: Viết Sổ Tay Hướng Dẫn<br>- Bạn Viết bằng tiếng Việt
+                            </div>
+                            <div style="color: #fff; font-size: 1.2rem; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));">⬇</div>
+                            <!-- B4 -->
+                            <div style="background: #3ba3f6; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 700; text-align: center; width: 80%; max-width: 450px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.05rem;">
+                                Bước 4: Gắn Sổ Tay Vào Trợ Lý AI
+                            </div>
+                            <div style="color: #fff; font-size: 1.2rem; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));">⬇</div>
+                            <!-- B5 (Red Circle) -->
+                            <div style="background: #ea4335; color: white; padding: 1.5rem; border-radius: 50%; font-weight: 800; text-align: center; width: 130px; height: 130px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(234, 67, 53, 0.4); line-height: 1.3; font-size: 1.1rem;">
+                                Bước 5:<br>Ra Lệnh Cho<br>AI!
+                            </div>
+                            <div style="color: #fff; font-size: 1.2rem; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));">⬇</div>
+                            <!-- Result (Green Rect) -->
+                            <div style="background: #34a853; color: white; padding: 1rem 1.5rem; border-radius: 8px; font-weight: 800; font-size: 1.2rem; text-align: center; width: 80%; max-width: 450px; box-shadow: 0 4px 15px rgba(52, 168, 83, 0.4);">
+                                AI Tự Động Làm Việc Thay Bạn
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SLIDE 6: 5 Bước Dạy Kỹ Năng Mới Details -->
+            <section class="slide">
+                <div class="slide-content centerpiece">
+                    <span class="module-indicator">CHI TIẾT: 5 BƯỚC</span>
+                    <h2>Diễn Giải Quá Trình 5 Bước "Học Nghề"</h2>
+                    <div class="content-scroll" style="max-width: 900px; margin: auto;">
+                        <div class="grid-2" style="grid-template-columns: 1fr; gap: 1rem;">
+                            <div class="detail-card" style="padding: 1.2rem 2rem;"><strong>1. Mục Tiêu:</strong> Quyết định việc muốn giao (Đăng bài Facebook có kèm ảnh).</div>
+                            <div class="detail-card" style="padding: 1.2rem 2rem;"><strong>2. Viết Mã Lệnh:</strong> (Lập trình viên làm) Viết lệnh để AI mở Firefox, đăng nhập, tìm ô đăng bài.</div>
+                            <div class="detail-card" style="padding: 1.2rem 2rem;"><strong>3. Viết Sổ Tay:</strong> Dùng ngôn ngữ đơn giản gạch đầu dòng để AI biết ý nghĩa công cụ.</div>
+                            <div class="detail-card" style="padding: 1.2rem 2rem;"><strong>4. Gắn vào AI:</strong> Lưu tờ sổ tay đó vào hệ thống thư viện của Trợ lý.</div>
+                            <div class="detail-card" style="padding: 1.2rem 2rem;"><strong>5. Ra Lệnh!</strong> Chỉ cần nói: "Đăng bài 'Chúc cuối tuần vui vẻ' lên Facebook", AI sẽ tự làm!</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 7: Quy Trình "Huấn Luyện" -->
+            <section class="slide">
+                <div class="slide-content centerpiece">
+                    <span class="module-indicator">PHẦN 5</span>
+                    <h2>Quy Trình "Huấn Luyện" Nhân Viên AI (Workflow 3 Bước)</h2>
+                    <div class="content-scroll">
+                        <p>Khi đã có kỹ năng, bạn trở thành người Quản lý. Hãy luyện tập quy trình này:</p>
+                        
+                        <div class="steps-flow" style="margin-top: 3rem;">
+                            <div class="step" style="flex: 1;">
+                                <div class="step-num">1</div>
+                                <h4>Viết Sổ tay</h4>
+                                <p style="font-size: 0.9rem;">(Writing the Skill) Bạn hãy coi mình đang soạn tin nhắn giao việc: "Khi có ảnh, hãy thu nhỏ, đóng logo rồi lưu ra thư mục A". Viết rõ ràng từng ý.</p>
+                            </div>
+                            <div class="arrow">➜</div>
+                            <div class="step" style="flex: 1;">
+                                <div class="step-num">2</div>
+                                <h4>Cho Thử Việc</h4>
+                                <p style="font-size: 0.9rem;">(Testing) Yêu cầu AI làm bản nháp. Quan sát! Nếu sai, <strong>ĐÙNG MẮNG NÓ!</strong> Hãy mở Sổ Tay và sửa chữa chữ viết lại cho thật minh bạch.</p>
+                            </div>
+                            <div class="arrow">➜</div>
+                            <div class="step" style="flex: 1;">
+                                <div class="step-num">3</div>
+                                <h4>Tự Động Hoá</h4>
+                                <p style="font-size: 0.9rem;">(Full Autonomy) Khi Sổ tay hoàn hảo, AI Agent sẽ tự động miết mài làm 24/7 mà không cần bạn phải rà soát thủ công theo dõi nữa.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SLIDE 8: Dùng Markdown -->
+            <section class="slide">
+                <div class="slide-content centerpiece">
+                    <span class="module-indicator">PHẦN 6</span>
+                    <h2>Tại Sao Lại Dùng Ngôn Ngữ Chữ (Markdown)?</h2>
+                    <div class="content-scroll" style="max-width: 900px; margin: auto;">
+                        <p>Markdown giúp tạo ra "Ngôn ngữ chung" hiểu được từ cả 2 phía:</p>
+                        <div class="benefit-grid">
+                            <div class="benefit-item">
+                                <h4>🙋‍♂️ Người Quản Lý (Là Bạn)</h4>
+                                <p>Đọc văn bản xuông Markdown để trơn tru dễ kiểm tra các bước giao việc có đúng logic kinh doanh ngoài đời không.</p>
+                            </div>
+                            <div class="benefit-item">
+                                <h4>🤖 Nhân Viên (AI Agent)</h4>
+                                <p>Đọc Markdown để hiểu rõ chính xác cần những nguyên liệu gì để thực thi lệnh của bạn.</p>
+                            </div>
+                        </div>
+                        <div class="detail-card" style="margin-top: 2rem;">
+                            <p><strong>Ví dụ nghề ảnh:</strong> Thay vì bạn 1 ngày xuất 100 tấm ảnh mỏi tay. Bạn ghi sổ: <i>"Gắn logo góc phải, resize 2048px, lưu vô thư mục X"</i>. AI sẽ răm rắp làm theo cho cả chục ngàn file. Tự do uống coffee!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 9: Dùng Gemini Tổng Quan -->
+            <section class="slide">
+                <div class="slide-content centerpiece">
+                    <span class="module-indicator">PHẦN 7</span>
+                    <h2>Nhờ Gemini Viết "Sổ Tay Kỹ Năng" Thay Bạn!</h2>
+                    <div class="content-scroll" style="max-width: 900px; margin: auto;">
+                        <p>Tin vui: Bạn không cần phải tự tốn chất xám để viết Markdown thủ công.</p>
+                        <div class="detail-card">
+                            <h4>Nguyên lý đơn giản:</h4>
+                            <p>Chúng ta nhờ "siêu thư ký" Gemini làm người biên dịch! Bạn nói tiếng Việt nhu cầu của mình, Gemini tự động làm ra Markdown siêu chuẩn. Sẽ có 4 Bước thực hành sau đây!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 10: Gemini B1 -->
+            <section class="slide">
+                <div class="slide-content side-by-side">
+                    <div class="text-side">
+                        <span class="module-indicator">BƯỚC 1</span>
+                        <h2>Ra Lệnh Cho Gemini</h2>
+                        <div class="content-scroll">
+                            <p>Sử dụng Tiếng Việt nói ra yêu cầu giao việc với Gemini y như thể dặn dò thư ký ngoan:</p>
+                            <p><em>"Tôi muốn tạo một Kỹ năng tên X (Vd: Phân loại ảnh), dùng để làm tính năng Y, cần truyền thông tin Z. Viết bản mô tả Skill đi nhé!"</em></p>
+                        </div>
+                    </div>
+                    <div class="image-side" style="padding: 15px;">
+                        <img src="/images/skill_pdf/page_8_img_5.png" alt="Gemini lệnh" class="pdf-image">
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 11: Gemini B2 -->
+            <section class="slide">
+                <div class="slide-content side-by-side invert">
+                    <div class="text-side">
+                        <span class="module-indicator">BƯỚC 2</span>
+                        <h2>Nhận Cấu Trúc Sổ Tay Chuẩn</h2>
+                        <div class="content-scroll">
+                            <p>Chỉ sau 2 giây, Gemini sẽ xuất ra cho bạn một bản Sổ Tay cực chuẩn có tên chức năng, mô tả đầy đủ với thứ tự chữ in đậm/nhạt cực kỳ chuyên nghiệp.</p>
+                        </div>
+                    </div>
+                    <div class="image-side" style="padding: 15px;">
+                        <img src="/images/skill_pdf/page_9_img_6.png" alt="Gemini nhận định dạng" class="pdf-image">
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 12: Gemini B3 -->
+            <section class="slide">
+                <div class="slide-content side-by-side">
+                    <div class="text-side">
+                        <span class="module-indicator">BƯỚC 3</span>
+                        <h2>Kiểm Tra Bảng Vật Tư (Đầu Vào)</h2>
+                        <div class="content-scroll">
+                            <p>Gemini sẽ tự động lập bảng Liệt Kê Vật Tư (Parameters) máy tính cần. Bạn (Người quản lý) chỉ cần nhìn lướt để đối chứng chéo lại xem chuẩn ý mình giao chưa.</p>
+                        </div>
+                    </div>
+                    <div class="image-side" style="padding: 15px;">
+                        <img src="/images/skill_pdf/page_10_img_7.png" alt="Gemini Kiểm Tra Object" class="pdf-image">
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 13: Gemini B4 -->
+            <section class="slide">
+                <div class="slide-content side-by-side invert">
+                    <div class="text-side">
+                        <span class="module-indicator">BƯỚC 4</span>
+                        <h2>Copy & Hoàn Tất Trợ Lý Nhập Chức Năng</h2>
+                        <div class="content-scroll">
+                            <p>Cuối cùng Gemini đưa bạn ví dụ mẫu. Lúc này chỉ đơn thuần <strong>"Copy Toàn Văn" dán đè vào Kho Não của AI Agent (như OpenClaw).</strong> Tèn ten: Hệ thống sẽ tự Unlock ngay năng lực này lên giao diện sử dụng!</p>
+                        </div>
+                    </div>
+                    <div class="image-side" style="padding: 15px;">
+                        <img src="/images/skill_pdf/page_11_img_8.png" alt="Xác nhận copy" class="pdf-image">
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 14: KẾT LUẬN -->
+            <section class="slide">
+                <div class="slide-content centerpiece">
+                    <h1 class="gradient-text" style="font-size: 5rem; line-height: 1;">Hoàn Tất Kỹ Năng!</h1>
+                    <p class="subtitle" style="font-size: 1.4rem; margin: 2rem 0; line-height: 1.5;">Kỹ năng (Skill / SOP) biến AI từ cỗ máy tán gẫu thành <strong>Trợ lý thực thi tự động</strong>.</p>
+                    <div class="content-scroll" style="text-align: center; max-width: 900px; margin: auto;">
+                        <p>Bằng cách định nghĩa "Sổ Tay" mượt mà (có Gemini hỗ trợ), bạn hoàn toàn có thể nhân bản hiệu suất của mình <strong>lên gấp 10 lần</strong> mà không cần biết viết một dòng code nhức não nào! Chúc bạn trở thành vị quản lý AI đại tài!</p>
+                    </div>
+                    <div style="margin-top: 4rem; font-weight: 900; font-style: italic; color: #ffffff; opacity: 0.6; letter-spacing: 1px;">@XÓA MÙ SKILL AI AGENT</div>
+                    <button class="cta-button" style="margin-top: 3rem; padding: 1.5rem 4rem; cursor: pointer; border-radius: 50px;" onclick="window.location.href='events.html'">HOÀN TẤT & TRỞ VỀ SỰ KIỆN</button>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="app-footer">
+            <button id="prev-btn" class="nav-btn" disabled>← TRƯỚC</button>
+            <div class="progress-bar mobile-hide"><div id="footer-progress" class="progress-fill"></div></div>
+            <button id="next-btn" class="nav-btn">SAU →</button>
+        </footer>
+    </div>
+    
+    <script type="module" src="./main.js"></script>
+</body>
+</html>

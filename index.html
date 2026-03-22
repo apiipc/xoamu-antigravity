@@ -10,11 +10,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         .content-scroll { max-height: 70vh; overflow-y: auto; padding-right: 1.5rem; margin-top: 0.5rem; text-align: justify; }
-        .content-scroll p { margin-bottom: 1.5rem; line-height: 1.8; font-size: 1.1rem; color: #1e293b; }
-        .detail-card { background: #ffffff; border: 1px solid #e2e8f0; padding: 1.8rem; border-radius: 16px; margin-bottom: 1.8rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); border-left: 8px solid var(--primary); }
-        .detail-card h4 { margin-bottom: 1rem; color: var(--primary); font-size: 1.3rem; font-weight: 800; text-transform: uppercase; }
-        .image-side-real { position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); background: #111; height: auto; border: 2px solid #334155; }
-        .image-side-real img { width: 100%; display: block; filter: contrast(1.1) brightness(1.05); }
+        .content-scroll p { margin-bottom: 1.5rem; line-height: 1.8; font-size: 1.1rem; color: var(--text-main); text-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .detail-card { 
+            background: var(--glass-bg); 
+            backdrop-filter: var(--glass-blur); 
+            -webkit-backdrop-filter: var(--glass-blur); 
+            border: 1px solid var(--glass-border); 
+            padding: 1.8rem; border-radius: 24px; margin-bottom: 1.8rem; 
+            box-shadow: var(--shadow); 
+            border-left: 6px solid var(--primary); 
+            color: var(--text-main);
+        }
+        .detail-card h4 { margin-bottom: 1rem; color: #ffffff; font-size: 1.3rem; font-weight: 800; text-transform: uppercase; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .image-side-real { position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); background: rgba(255,255,255,0.1); height: auto; border: 1px solid var(--glass-border); padding: 10px; }
+        .image-side-real img { width: 100%; display: block; border-radius: 14px; }
         .image-overlay-marker {
             position: absolute;
             border: 4px solid #f43f5e;
@@ -30,25 +39,28 @@
         }
         .image-label-callout {
             position: absolute;
-            background: #f43f5e;
+            background: rgba(244, 63, 94, 0.85);
+            backdrop-filter: blur(10px);
             color: white;
             padding: 8px 16px;
             border-radius: 8px;
             font-size: 0.9rem;
             font-weight: 900;
             white-space: nowrap;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
             z-index: 20;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            border: 1px solid rgba(255,255,255,0.3);
         }
-        .module-indicator { padding: 8px 18px; background: rgba(var(--primary-rgb), 0.1); color: var(--primary); border-radius: 30px; font-size: 0.85rem; font-weight: 800; margin-bottom: 20px; display: inline-block; border: 1px solid var(--primary); }
+        .module-indicator { padding: 8px 18px; background: rgba(255,255,255, 0.2); color: #fff; border-radius: 30px; font-size: 0.85rem; font-weight: 800; margin-bottom: 20px; display: inline-block; border: 1px solid rgba(255,255,255,0.4); text-shadow: 0 2px 4px rgba(0,0,0,0.2); backdrop-filter: blur(10px); }
         .benefit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
-        .benefit-item { background: #fff; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border-top: 5px solid var(--secondary); transition: transform 0.3s; }
-        .benefit-item:hover { transform: translateY(-5px); }
+        .benefit-item { background: var(--glass-bg); backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); padding: 2rem; border-radius: 24px; box-shadow: var(--shadow); border-top: 5px solid var(--secondary); transition: transform 0.3s; color: var(--text-main); }
+        .benefit-item h4 { color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.2); margin-bottom: 0.5rem; }
+        .benefit-item:hover { transform: translateY(-5px); background: rgba(255,255,255,0.2); }
         .bullet-list { list-style: none; padding-left: 0; }
-        .bullet-list li { position: relative; padding-left: 1.5rem; margin-bottom: 0.8rem; line-height: 1.6; }
-        .bullet-list li::before { content: "➜"; position: absolute; left: 0; color: var(--primary); font-weight: 900; }
+        .bullet-list li { position: relative; padding-left: 1.5rem; margin-bottom: 0.8rem; line-height: 1.6; color: var(--text-main); }
+        .bullet-list li::before { content: "➜"; position: absolute; left: 0; color: #fff; font-weight: 900; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
     </style>
 </head>
 <body class="light-theme">
@@ -62,19 +74,31 @@
         <main class="slide-container" id="slide-wrapper">
             <!-- SLIDE 1: SPLASH -->
             <section class="slide active">
-                <div class="slide-content centerpiece" style="padding-top: 0; margin-top: -3rem;">
-                    <span class="info-badge" style="padding: 0.4rem 1.2rem; font-size: 0.75rem;">PHIÊN BẢN CƠ BẢN</span>
-                    <h1 class="gradient-text" style="font-size: 2.8rem; line-height: 1.1; margin-bottom: 0.8rem;">Xóa Mù Anti Gravity</h1>
-                    <p class="subtitle" style="font-size: 1.1rem; max-width: 750px; margin: 0 auto 1.2rem; line-height: 1.5;">Đây không chỉ là chatbot, mà là nền tảng giúp bạn thoát khỏi sự lệ thuộc vào Prompt hay việc copy-paste đáp án. Antigravity là bước đầu của việc hiện thực hóa nhân bản trí tuệ người dùng vào AI.</p>
+                <div class="slide-content side-by-side" style="padding-top: 0; align-items: center;">
                     
-                    <div class="intro-image-container" style="max-width: 550px; margin: 0 auto 1.2rem; border-radius: 12px; overflow: hidden; box-shadow: 0 12px 25px rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.1);">
-                        <img src="/images/intro_bg.jpg" alt="Anti Gravity Introduction" style="width: 100%; display: block;">
+                    <!-- Text Intro Side -->
+                    <div class="text-side" style="text-align: left;">
+                        <span class="info-badge" style="padding: 0.4rem 1.2rem; font-size: 0.75rem;">PHIÊN BẢN CƠ BẢN</span>
+                        <h1 class="gradient-text" style="font-size: 3.5rem; line-height: 1.1; margin-bottom: 1.2rem; text-align: left;">Xóa Mù<br>Anti Gravity</h1>
+                        <p class="subtitle" style="font-size: 1.15rem; max-width: 600px; margin: 0 0 2rem 0; line-height: 1.6; text-align: left;">Đây không chỉ là chatbot, mà là nền tảng giúp bạn thoát khỏi sự lệ thuộc vào Prompt hay việc copy-paste đáp án. Antigravity là bước đầu của việc hiện thực hóa nhân bản trí tuệ người dùng vào AI.</p>
+                        
+                        <div>
+                            <button class="nav-btn next-trigger" onclick="document.getElementById('next-btn').click()" style="padding: 1rem 3rem; font-size: 1.1rem; min-width: 200px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">BẮT ĐẦU TÌM HIỂU</button>
+                        </div>
                     </div>
 
-                    <div style="margin-top: 1rem; text-align: center;">
-                        <button class="nav-btn next-trigger" onclick="document.getElementById('next-btn').click()" style="padding: 0.8rem 2.5rem; font-size: 1.1rem; min-width: 200px; background: var(--gradient);">BẮT ĐẦU TÌM HIỂU</button>
+                    <!-- Events Widget Side -->
+                    <div class="image-side" style="padding: 3rem 2.5rem; text-align: center; border-radius: 32px; box-shadow: 0 20px 50px rgba(0,0,0,0.25);">
+                        <h2 style="font-family: 'Outfit', sans-serif; font-size: 2.2rem; font-weight: 800; margin-bottom: 2rem; color: #fff; text-shadow: 0 2px 5px rgba(0,0,0,0.2); letter-spacing: -0.5px;">Basic Tech AI</h2>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+                            <!-- Event Card -->
+                            <div onclick="document.getElementById('next-btn').click()" style="background: rgba(255,255,255,0.2); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); padding: 2rem 1.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.4); text-align: left; box-shadow: inset 0 2px 4px rgba(255,255,255,0.3), 0 10px 30px rgba(0,0,0,0.1); cursor: pointer; transition: transform 0.3s ease, background 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.background='rgba(255,255,255,0.25)';" onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255,255,255,0.2)';">
+                                <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; text-shadow: 0 2px 5px rgba(0,0,0,0.2); margin: 0; text-align: center;">Lớp Xóa mù Antigravity</h3>
+                            </div>
+                        </div>
                     </div>
-                </div>
+
                 </div>
             </section>
 
@@ -214,7 +238,7 @@
                     </div>
                     <div class="image-side">
                         <div class="image-side-real">
-                            <img src="/images/real/giao diện phần mềm.png" alt="Giao diện thật">
+                            <img src="/images/real/giao_dien_phan_mem.png" alt="Giao diện thật">
                             <div class="image-overlay-marker" style="top: 10%; left: 0%; width: 28%; height: 85%;"></div>
                             <div class="image-label-callout" style="top: 50%; left: 10%;">BỘ NÃO TRI THỨC</div>
                         </div>
@@ -234,7 +258,7 @@
                     </div>
                     <div class="image-side">
                         <div class="image-side-real">
-                            <img src="/images/real/các chế độ.png" alt="Modes">
+                            <img src="/images/real/cac_che_o.png" alt="Modes">
                             <div class="image-overlay-marker" style="top: 18%; left: 32%; width: 35%; height: 12%;"></div>
                             <div class="image-label-callout" style="top: 10%; left: 35%;">CHỌN CHẾ ĐỘ TƯ DUY</div>
                         </div>
@@ -254,7 +278,7 @@
                     </div>
                     <div class="image-side">
                         <div class="image-side-real">
-                            <img src="/images/real/phân tích tài liệu pdf.png" alt="PDF Analysis">
+                            <img src="/images/real/phan_tich_tai_lieu_pdf.png" alt="PDF Analysis">
                             <div class="image-overlay-marker" style="top: 35%; left: 45%; width: 50%; height: 60%;"></div>
                             <div class="image-label-callout" style="top: 30%; left: 55%;">CHỈ NGUỒN SỰ THẬT</div>
                         </div>
@@ -274,7 +298,7 @@
                     </div>
                     <div class="image-side">
                         <div class="image-side-real">
-                            <img src="/images/real/dùng gravitty đọc các file relay bảo vệ.png" alt="Relay Study">
+                            <img src="/images/real/dung_gravitty_oc_cac_file_relay_bao_ve.png" alt="Relay Study">
                             <div class="image-overlay-marker" style="top: 15%; left: 55%; width: 40%; height: 75%;"></div>
                             <div class="image-label-callout" style="top: 10%; left: 65%;">SOÁT LỖI CÀI ĐẶT RELAY</div>
                         </div>
@@ -294,7 +318,7 @@
                     </div>
                     <div class="image-side">
                         <div class="image-side-real">
-                            <img src="/images/real/tạo báo cáo bằng file MD ( ngôn ngữ AI).png" alt="MD Report">
+                            <img src="/images/real/tao_bao_cao_bang_file_md_ngon_ngu_ai.png" alt="MD Report">
                             <div class="image-overlay-marker" style="top: 5%; left: 48%; width: 48%; height: 90%;"></div>
                             <div class="image-label-callout" style="top: 2%; left: 60%;">XUẤT BẢN BÁO CÁO TỰ ĐỘNG</div>
                         </div>
@@ -315,7 +339,7 @@
                     </div>
                     <div class="image-side">
                         <div class="image-side-real">
-                            <img src="/images/real/bim/toàn bộ báo cáo IDE gravity tạo ra.png" alt="BIM Full">
+                            <img src="/images/real/bim/toan_bo_bao_cao_ide_gravity_tao_ra.png" alt="BIM Full">
                             <div class="image-overlay-marker" style="top: 20%; left: 10%; width: 80%; height: 60%;"></div>
                             <div class="image-label-callout" style="top: 15%; left: 20%;">CẤU TRÚC BÁO CÁO BIM</div>
                         </div>
@@ -335,7 +359,7 @@
                     </div>
                     <div class="image-side">
                         <div class="image-side-real">
-                            <img src="/images/real/bim/tạo sơ đồ hệ thống.png" alt="Schema">
+                            <img src="/images/real/bim/tao_so_o_he_thong.png" alt="Schema">
                             <div class="image-overlay-marker" style="top: 25%; left: 25%; width: 50%; height: 50%;"></div>
                             <div class="image-label-callout" style="top: 20%; left: 30%;">VẼ SƠ ĐỒ TỰ ĐỘNG</div>
                         </div>
@@ -355,7 +379,7 @@
                     </div>
                     <div class="image-side">
                         <div class="image-side-real">
-                            <img src="/images/real/bim/tạo ra biểu đồ.png" alt="Charts">
+                            <img src="/images/real/bim/tao_ra_bieu_o.png" alt="Charts">
                             <div class="image-overlay-marker" style="top: 25%; left: 25%; width: 50%; height: 50%;"></div>
                         </div>
                     </div>
@@ -374,7 +398,7 @@
                     </div>
                     <div class="image-side">
                         <div class="image-side-real">
-                            <img src="/images/real/bim/file docx được anti gravity làm.png" alt="Final Word">
+                            <img src="/images/real/bim/file_docx_uoc_anti_gravity_lam.png" alt="Final Word">
                             <div class="image-overlay-marker" style="top: 5%; left: 5%; width: 90%; height: 90%;"></div>
                             <div class="image-label-callout" style="top: 2%; left: 10%;">THÀNH PHẨM REPORT .DOCX</div>
                         </div>
