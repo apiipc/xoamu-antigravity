@@ -3,994 +3,305 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tìm hiểu Anti Gravity cơ bản - Bách Khoa Toàn Thư "Xóa Mù"</title>
-    <link rel="stylesheet" href="./style.css">
+    <title>Sự Kiện - Xóa Mù Antigravity</title>
+    <!-- Kế thừa thư viện CSS có nền cam và hiệu ứng kính mờ của Slide -->
+    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;700;800;900&display=swap" rel="stylesheet">
     <style>
-        .content-scroll { max-height: 70vh; overflow-y: auto; padding-right: 1.5rem; margin-top: 0.5rem; text-align: justify; }
-        .content-scroll p { margin-bottom: 1.5rem; line-height: 1.8; font-size: 1.1rem; color: var(--text-main); text-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        .detail-card { 
-            background: var(--glass-bg); 
-            backdrop-filter: var(--glass-blur); 
-            -webkit-backdrop-filter: var(--glass-blur); 
-            border: 1px solid var(--glass-border); 
-            padding: 1.8rem; border-radius: 24px; margin-bottom: 1.8rem; 
-            box-shadow: var(--shadow); 
-            border-left: 6px solid var(--primary); 
-            color: var(--text-main);
+        /* Specific adjustments for the landing layout that build upon style.css */
+        body, #app {
+            overflow-y: auto !important; /* Enable scrolling for landing page */
+            height: auto;
+            min-height: 100vh;
         }
-        .detail-card h4 { margin-bottom: 1rem; color: #ffffff; font-size: 1.3rem; font-weight: 800; text-transform: uppercase; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-        .image-side-real { position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); background: rgba(255,255,255,0.1); height: auto; border: 1px solid var(--glass-border); padding: 10px; }
-        .image-side-real img { width: 100%; display: block; border-radius: 14px; }
-        .image-overlay-marker {
-            position: absolute;
-            border: 4px solid #f43f5e;
-            border-radius: 50%;
-            pointer-events: none;
-            box-shadow: 0 0 0 6px rgba(244, 63, 94, 0.3), inset 0 0 40px rgba(244, 63, 94, 0.2);
-            animation: pulse-red 2s infinite ease-in-out;
+        
+        .landing-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 8rem 2rem 5rem;
+            position: relative;
+            z-index: 10;
         }
-        @keyframes pulse-red {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.6; }
-            100% { transform: scale(1); opacity: 1; }
+
+        .landing-header {
+            text-align: center;
+            margin-bottom: 4rem;
         }
-        .image-label-callout {
-            position: absolute;
-            background: rgba(244, 63, 94, 0.85);
+
+        .title-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(255,255,255,0.15);
             backdrop-filter: blur(10px);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 900;
-            white-space: nowrap;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            z-index: 20;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        .module-indicator { padding: 8px 18px; background: rgba(255,255,255, 0.2); color: #fff; border-radius: 30px; font-size: 0.85rem; font-weight: 800; margin-bottom: 20px; display: inline-block; border: 1px solid rgba(255,255,255,0.4); text-shadow: 0 2px 4px rgba(0,0,0,0.2); backdrop-filter: blur(10px); }
-        .benefit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
-        .benefit-item { background: var(--glass-bg); backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); padding: 2rem; border-radius: 24px; box-shadow: var(--shadow); border-top: 5px solid var(--secondary); transition: transform 0.3s; color: var(--text-main); }
-        .benefit-item h4 { color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.2); margin-bottom: 0.5rem; }
-        .benefit-item:hover { transform: translateY(-5px); background: rgba(255,255,255,0.2); }
-        .bullet-list { list-style: none; padding-left: 0; }
-        .bullet-list li { position: relative; padding-left: 1.5rem; margin-bottom: 0.8rem; line-height: 1.6; color: var(--text-main); }
-        .bullet-list li::before { content: "➜"; position: absolute; left: 0; color: #fff; font-weight: 900; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+
+        .main-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            color: #fff;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            letter-spacing: -1px;
+        }
+
+        .sub-title {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.85);
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .event-list-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Glassmorphism Event Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 24px;
+            padding: 2rem 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(255,255,255,0.4);
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.22);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25), inset 0 2px 4px rgba(255,255,255,0.5);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .card-left {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.8rem;
+        }
+
+        .circle-num {
+            width: 48px;
+            height: 48px;
+            background: rgba(255,255,255,0.25);
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Differentiate inactive status */
+        .glass-card.past {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+        .glass-card.past:hover {
+            transform: none;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            cursor: default;
+        }
+        .glass-card.past .circle-num, .glass-card.past .card-title, .glass-card.past .card-meta {
+            opacity: 0.6;
+        }
+
+        .card-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            padding-top: 0.2rem;
+        }
+
+        .card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            letter-spacing: -0.3px;
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            opacity: 0.85;
+            letter-spacing: 0.5px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .icon {
+            width: 16px;
+            height: 16px;
+            stroke-width: 2.5;
+            color: inherit;
+        }
+
+        .card-action {
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .action-past {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .action-active {
+            color: #ffffff;
+            background: rgba(255,255,255,0.25);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.5);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+        }
+
+        .glass-card:hover .action-active {
+            background: #ffffff;
+            color: #d4511d; /* Orange text on white button */
+            transform: translateX(5px);
+        }
+        
+        .top-nav {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            z-index: 100;
+            background: rgba(255,255,255,0.15);
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            transition: opacity 0.2s;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .back-btn:hover { opacity: 1; }
+
+        @media (max-width: 768px) {
+            .main-title { font-size: 2.5rem; }
+            .glass-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2rem;
+                padding: 1.5rem;
+            }
+            .card-action {
+                align-self: stretch;
+                justify-content: flex-end;
+            }
+        }
+        #app {
+            background: transparent !important;
+            pointer-events: none;
+        }
+        .top-nav a, .main-title, .glass-card {
+            pointer-events: auto;
+        }
     </style>
 </head>
 <body class="light-theme">
-    <div id="app">
-        <header class="app-header">
-            <div class="logo"><span class="bolt">⚡</span><span class="brand">ANTI GRAVITY <span class="event">TÌM HIỂU CƠ BẢN</span></span></div>
-            <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
-            <div class="page-count"><span id="current-slide-num">1</span> / <span id="total-slides-num">50</span></div>
-        </header>
+    <div id="vanta-bg" style="position: fixed; z-index: 0; top: 0; left: 0; width: 100vw; height: 100vh;"></div>
+    
+    <div id="app" style="position: relative; z-index: 1;">
 
-        <main class="slide-container" id="slide-wrapper">
-            <!-- SLIDE 1: SPLASH -->
-            <section class="slide active">
-                <div class="slide-content side-by-side" style="padding-top: 0; align-items: center;">
-                    
-                    <!-- Text Intro Side -->
-                    <div class="text-side" style="text-align: left;">
-                        <span class="info-badge" style="padding: 0.4rem 1.2rem; font-size: 0.75rem;">PHIÊN BẢN CƠ BẢN</span>
-                        <h1 class="gradient-text" style="font-size: 3.5rem; line-height: 1.1; margin-bottom: 1.2rem; text-align: left;">Xóa Mù<br>Anti Gravity</h1>
-                        <p class="subtitle" style="font-size: 1.15rem; max-width: 600px; margin: 0 0 2rem 0; line-height: 1.6; text-align: left;">Đây không chỉ là chatbot, mà là nền tảng giúp bạn thoát khỏi sự lệ thuộc vào Prompt hay việc copy-paste đáp án. Antigravity là bước đầu của việc hiện thực hóa nhân bản trí tuệ người dùng vào AI.</p>
-                        
-                        <div>
-                            <button class="nav-btn next-trigger" onclick="document.getElementById('next-btn').click()" style="padding: 1rem 3rem; font-size: 1.1rem; min-width: 200px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">BẮT ĐẦU TÌM HIỂU</button>
-                        </div>
-                    </div>
 
-                    <!-- Events Widget Side -->
-                    <div class="image-side" style="padding: 3rem 2.5rem; text-align: center; border-radius: 32px; box-shadow: 0 20px 50px rgba(0,0,0,0.25);">
-                        <h2 style="font-family: 'Outfit', sans-serif; font-size: 2.2rem; font-weight: 800; margin-bottom: 2rem; color: #fff; text-shadow: 0 2px 5px rgba(0,0,0,0.2); letter-spacing: -0.5px;">Basic Tech AI</h2>
-                        
-                        <div style="display: flex; flex-direction: column; gap: 1.2rem;">
-                            <!-- Event Card -->
-                            <div onclick="document.getElementById('next-btn').click()" style="background: rgba(255,255,255,0.2); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); padding: 2rem 1.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.4); text-align: left; box-shadow: inset 0 2px 4px rgba(255,255,255,0.3), 0 10px 30px rgba(0,0,0,0.1); cursor: pointer; transition: transform 0.3s ease, background 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.background='rgba(255,255,255,0.25)';" onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255,255,255,0.2)';">
-                                <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; text-shadow: 0 2px 5px rgba(0,0,0,0.2); margin: 0; text-align: center;">Lớp Xóa mù Antigravity</h3>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
-            <!-- SLIDE 2: TỔNG QUAN -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">PHẦN 1: TỔNG QUAN HỆ THỐNG</span>
-                    <h2>Antigravity AI: Cuộc Cách Mạng Quản Trị</h2>
-                    <div class="content-scroll" style="max-width: 950px; margin: auto;">
-                        <p>Chúng ta đang bước vào kỷ nguyên mà công cụ thông minh không chỉ là một trợ lý lẻ tẻ, mà là **xương sống của mọi hoạt động**. Anti Gravity được xây dựng như một hệ thống hỗ trợ toàn diện, giúp kết nối mọi dữ liệu rời rạc thành một kho thông tin dễ dùng.</p>
-                        <p>Điểm khác biệt lớn nhất giữa một "người dùng mới" và một "người dùng thành thạo" là khả năng dùng Anti Gravity để sắp xếp công việc tự động.</p>
-                        <div class="detail-card">
-                            <h4>💎 3 Cột Trụ Của Antigravity:</h4>
-                            <ul class="bullet-list">
-                                <li><strong>Local Intelligence:</strong> AI chạy trên dữ liệu thực tế của chính bạn, không dựa vào thông tin "ảo" trên mạng.</li>
-                                <li><strong>Privacy First:</strong> Bảo mật cấp độ doanh nghiệp, mọi dữ liệu nhạy cảm được xử lý ưu tiên tại chỗ.</li>
-                                <li><strong>Agentic Architecture:</strong> Khả năng phân quyền và phối hợp giữa hàng chục nhân sự số chuyên biệt.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SLIDE 3: TÁC DỤNG LỢI ÍCH -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">PHẦN 1: GIÁ TRỊ CỐT LÕI</span>
-                    <h2>Tác Dụng & Lợi Ích Cận Cảnh</h2>
-                    <div class="content-scroll">
-                        <p>Tại sao bạn phải tìm hiểu Anti Gravity ngay hôm nay? Bởi vì việc chậm trễ ứng dụng cũng giống như việc từ chối dùng máy tính khi mọi người đã bỏ máy đánh chữ từ lâu rồi.</p>
-                        <div class="benefit-grid">
-                            <div class="benefit-item">
-                                <h4>🚀 Siêu Hiệu Suất (Leverage)</h4>
-                                <p>Một kỹ sư có thể xử lý lượng hồ sơ thầu tương đương 10 người làm nhờ khả năng quét và so sánh ngữ nghĩa đồng thời hàng trăm tệp PDF/Excel.</p>
-                            </div>
-                            <div class="benefit-item">
-                                <h4>✅ Chính Xác Tuyệt Đối (Zero Hallucination)</h4>
-                                <p>Sử dụng cơ chế trích dẫn nguồn (Citations) trực tiếp từ tài liệu gốc, đảm bảo mọi kết luận đều có bằng chứng số liệu cụ thể.</p>
-                            </div>
-                            <div class="benefit-item">
-                                <h4>🛡️ Chủ Quyền Dữ Liệu</h4>
-                                <p>Doanh nghiệp sở hữu hoàn toàn tri thức đã được AI huấn luyện, không sợ mất nhân tài là mất đi kinh nghiệm tích lũy nhiều năm.</p>
-                            </div>
-                            <div class="benefit-item">
-                                <h4>📈 Tối Ưu Hóa Chi Phí (OPEX)</h4>
-                                <p>Cắt giảm 80% thời gian cho các tác vụ lặp lại (báo cáo ngày, email khách hàng, đối soát chứng từ) để tập trung cao độ vào sáng tạo.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SLIDE 4: ỨNG DỤNG BỘ PHẬN 1 -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">PHẦN 1: THIẾT KẾ TỔ CHỨC</span>
-                    <h2>Ứng Dụng Trong Các Bộ Phận (Khối Quản Lý)</h2>
-                    <div class="content-scroll">
-                        <p>Antigravity AI len lỏi vào từng "mạch máu" của doanh nghiệp, giúp mỗi phòng ban trở thành một phiên bản mạnh mẽ hơn của chính mình.</p>
-                        <div class="grid-2">
-                            <div class="detail-card">
-                                <h4>🏢 Ban Lãnh Đạo & Điều Hành</h4>
-                                <ul class="bullet-list">
-                                    <li>Tóm tắt các báo cáo dự án dài hàng trăm trang thành 5 điểm then chốt.</li>
-                                    <li>Thẩm định độ tin cậy của các báo cáo tài chính bằng AI kiểm toán.</li>
-                                    <li>Phân tích thị trường và dự báo biến động giá dựa trên dữ liệu Web tích hợp.</li>
-                                </ul>
-                            </div>
-                            <div class="detail-card">
-                                <h4>📑 Ban Đấu Thầu & Pháp Chế</h4>
-                                <ul class="bullet-list">
-                                    <li>Quét lỗi logic trong các hợp đồng thầu phức tạp.</li>
-                                    <li>Tự động lập bảng so sánh giá và thông số kỹ thuật giữa 20 nhà thầu.</li>
-                                    <li>Tra cứu nhanh các thông tư, quy định pháp luật mới nhất để áp dụng cho dự án.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SLIDE 5: ỨNG DỤNG BỘ PHẬN 2 -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">PHẦN 1: THIẾT KẾ TỔ CHỨC</span>
-                    <h2>Ứng Dụng Trong Khối Kỹ Thuật & Tài Chính</h2>
-                    <div class="content-scroll">
-                        <div class="grid-2">
-                            <div class="detail-card">
-                                <h4>⚙️ Khối Kỹ Thuật & O&M</h4>
-                                <ul class="bullet-list">
-                                    <li>Đọc và phân tích nhật ký sự cố SCADA để tìm quy luật hư hỏng.</li>
-                                    <li>Hỗ trợ kỹ sư hiện trường đọc các bản vẽ CAD/BIM phức tạp.</li>
-                                    <li>Tự động hóa việc lập phương thức vận hành trạm biến áp hàng tuần.</li>
-                                </ul>
-                            </div>
-                            <div class="detail-card">
-                                <h4>💰 Ban Tài Chính & Kế Toán</h4>
-                                <ul class="bullet-list">
-                                    <li>Đối soát hóa đơn điện tử với khối lượng nghiệm thực thực tế qua AI Vision.</li>
-                                    <li>Dự báo dòng tiền (Cashflow) dựa trên tiến độ thanh toán dự kiến của các nhà thầu.</li>
-                                    <li>Phân tích độ lệch (Variance) giữa ngân sách dự toán và chi phí thực tế.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SLIDE 6: TASK OS -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">PHẦN 1: QUẢN TRỊ CÔNG VIỆC</span>
-                    <h2>Cách Quản Lý Công Việc Với Anti Gravity</h2>
-                    <div class="content-scroll" style="max-width: 950px; margin: auto;">
-                        <p>Sự khác biệt của Anti Gravity là nó không chỉ "nói" mà còn giúp bạn "làm". Hệ thống giúp bạn quản lý công việc cực kỳ đơn giản.</p>
-                        <div class="detail-card">
-                            <h4>🔑 Các tính năng quản trị đỉnh cao:</h4>
-                            <p>- **AI Task Decomposition:** Đưa vào một mục tiêu lớn (ví dụ: "Lập hồ sơ nghiệm thu dự án A"), AI sẽ tự bóc tách thành 50 đầu việc nhỏ gắn với các Agent chuyên biệt.<br>- **Dashboard 360:** Theo dõi tình hình sức khỏe của dự án qua các biểu đồ Gantt và Kanban được cập nhật tự động bằng ngôn ngữ tự nhiên.<br>- **Cảnh báo rủi ro:** AI tự động gợi ý: "Sắp tới hạn nộp hồ sơ thiết kế nhưng chưa thấy file kỹ thuật trong folder INPUT", giúp bạn luôn đi trước một bước.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- PHẦN 2: THỰC CHIẾN GIAO DIỆN (REAL IMAGES SLIDES 7-15) -->
+        <div class="landing-container">
             
-            <section class="slide">
-                <div class="slide-content side-by-side">
-                    <div class="text-side">
-                        <span class="module-indicator">PHẦN 2: TRẢI NGHIỆM THỰC TẾ</span>
-                        <h2>Giao Diện Tổng Trạm Điều Hành</h2>
-                        <div class="content-scroll">
-                            <p>Hãy bắt đầu bằng việc nhìn trực tiếp vào "trung tâm chỉ huy" của Antigravity. Đây là màn hình gốc khi bạn khởi động phần mềm.</p>
-                            <p>Vùng khoanh đỏ phía trái chính là **Cấu trúc Thư mục Tri thức (Knowledge Catalogs)**. Đây không phải là nơi lưu file thông thường, đây là "bộ não" tàng kinh các nơi bạn nạp mọi dữ liệu của doanh nghiệp vào cho AI học.</p>
-                            <p><strong>Bí quyết Expert:</strong> Cách bạn đặt tên folder và phân cấp dữ liệu sẽ quyết định 50% độ thông minh của AI khi trả lời.</p>
-                        </div>
-                    </div>
-                    <div class="image-side">
-                        <div class="image-side-real">
-                            <img src="/images/real/giao_dien_phan_mem.png" alt="Giao diện thật">
-                            <div class="image-overlay-marker" style="top: 10%; left: 0%; width: 28%; height: 85%;"></div>
-                            <div class="image-label-callout" style="top: 50%; left: 10%;">BỘ NÃO TRI THỨC</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <div class="landing-header">
+                <h1 class="main-title">Basic Tech AI</h1>
+            </div>
 
-            <section class="slide">
-                <div class="slide-content side-by-side invert">
-                    <div class="text-side">
-                        <span class="module-indicator">PHẦN 2: THỰC CHIẾN</span>
-                        <h2>Ma Trận Chế Độ Truy Vấn (Modes)</h2>
-                        <div class="content-scroll">
-                            <p>Nhìn vào thanh công cụ ở giữa màn hình (đã khoanh đỏ). Expert không bao giờ chỉ dùng chế độ Chat.</p>
-                            <p><strong>Ask Mode:</strong> Dùng để hỏi các câu hỏi cụ thể cần trích lục dữ liệu nhanh.<br><strong>Search Mode:</strong> Dùng khi bạn cần AI quét qua hàng vạn file để tìm ra kim đáy bể.<br><strong>Chat Mode:</strong> Dùng để brainstorm và cùng AI lên kế hoạch dự án.</p>
-                        </div>
-                    </div>
-                    <div class="image-side">
-                        <div class="image-side-real">
-                            <img src="/images/real/cac_che_o.png" alt="Modes">
-                            <div class="image-overlay-marker" style="top: 18%; left: 32%; width: 35%; height: 12%;"></div>
-                            <div class="image-label-callout" style="top: 10%; left: 35%;">CHỌN CHẾ ĐỘ TƯ DUY</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <div class="event-list-container">
+                
+                <a href="xoamu.html" class="glass-card" style="justify-content: center; text-decoration: none;">
+                    <h3 class="card-title" style="margin: 0; font-size: 1.8rem; color: #fff;">Lớp Xóa mù Antigravity</h3>
+                </a>
 
-            <section class="slide">
-                <div class="slide-content side-by-side">
-                    <div class="text-side">
-                        <span class="module-indicator">PHẦN 2: THỰC CHIẾN</span>
-                        <h2>Phân Tích PDF & Cơ Chế "Soi" Nguồn</h2>
-                        <div class="content-scroll">
-                            <p>Đây là tính năng quan trọng nhất để chống lại sự "bốc phét" (Hallucination) của AI. Trong hình thực tế, AI đang trích xuất thông tin kỹ thuật dự án.</p>
-                            <p>Khoanh đỏ chỉ ra số **Trích dẫn (Citations)**. Khi bạn nhấn vào đó, Antigravity sẽ tự động mở tệp PDF ra ở khung hình bên cạnh và bôi đậm đúng dòng chứa thông tin đó. Đây chính là giải pháp cho việc "cầm tay chỉ việc" giúp chuyên gia kiểm soát 100% sự thật.</p>
-                        </div>
-                    </div>
-                    <div class="image-side">
-                        <div class="image-side-real">
-                            <img src="/images/real/phan_tich_tai_lieu_pdf.png" alt="PDF Analysis">
-                            <div class="image-overlay-marker" style="top: 35%; left: 45%; width: 50%; height: 60%;"></div>
-                            <div class="image-label-callout" style="top: 30%; left: 55%;">CHỈ NGUỒN SỰ THẬT</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                <a href="skill_ai_agent.html" class="glass-card" style="justify-content: center; text-decoration: none; margin-top: 1.5rem;">
+                    <h3 class="card-title" style="margin: 0; font-size: 1.8rem; color: #fff;">Xóa Mù Skill AI Agent</h3>
+                </a>
 
-            <section class="slide">
-                <div class="slide-content side-by-side invert">
-                    <div class="text-side">
-                        <span class="module-indicator">PHẦN 2: THỰC CHIẾN</span>
-                        <h2>Đọc File Relay Bảo Vệ Cận Cảnh</h2>
-                        <div class="content-scroll">
-                            <p>Ảnh chụp thực tế này minh chứng năng lực chuyên ngành điện. AI đang phân tích tệp cài đặt (Settings file) của thiết bị Relay bảo vệ.</p>
-                            <p>Vùng khoanh đỏ chỉ ra các thông số logic được AI trích xuất và lập bảng so sánh. Nếu có một cài đặt sai lệch (mismatch) so với tiêu chuẩn, AI sẽ đánh dấu cảnh báo màu đỏ ngay lập tức để kỹ sư lưu ý.</p>
-                        </div>
-                    </div>
-                    <div class="image-side">
-                        <div class="image-side-real">
-                            <img src="/images/real/dung_gravitty_oc_cac_file_relay_bao_ve.png" alt="Relay Study">
-                            <div class="image-overlay-marker" style="top: 15%; left: 55%; width: 40%; height: 75%;"></div>
-                            <div class="image-label-callout" style="top: 10%; left: 65%;">SOÁT LỖI CÀI ĐẶT RELAY</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="slide">
-                <div class="slide-content side-by-side">
-                    <div class="text-side">
-                        <span class="module-indicator">PHẦN 2: THỰC CHIẾN</span>
-                        <h2>Soạn Thảo Báo Cáo MD (Markdown)</h2>
-                        <div class="content-scroll">
-                            <p>AI không chỉ chat, nó sinh ra tài liệu chuẩn mực. Trong hình bên phải là màn hình soạn thảo báo cáo thời gian thực.</p>
-                            <p>AI đang viết trực tiếp bản nháp báo cáo kỹ thuật. Expert sẽ yêu cầu: "Soạn báo cáo MD về tình hình đóng điện trạm A, dựa trên các biên bản nghiệm thu trong folder PDF". Kết quả là một văn bản hoàn chỉnh có tiêu đề, bảng biểu và đồ thị (Slide sau).</p>
-                        </div>
-                    </div>
-                    <div class="image-side">
-                        <div class="image-side-real">
-                            <img src="/images/real/tao_bao_cao_bang_file_md_ngon_ngu_ai.png" alt="MD Report">
-                            <div class="image-overlay-marker" style="top: 5%; left: 48%; width: 48%; height: 90%;"></div>
-                            <div class="image-label-callout" style="top: 2%; left: 60%;">XUẤT BẢN BÁO CÁO TỰ ĐỘNG</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- BIM SHOWCASE (Slides 12-15) -->
-            <section class="slide">
-                <div class="slide-content side-by-side invert">
-                    <div class="text-side">
-                        <span class="module-indicator">SHOWCASE: MÔ HÌNH BIM</span>
-                        <h2>Hệ Thống Báo Cáo BIM Toàn Diện</h2>
-                        <div class="content-scroll">
-                            <p>Hãy xem thành phẩm thực tế của Antigravity khi xử lý một dự án xây dựng số (BIM). Đây là toàn cảnh Dashboard báo cáo mà AI tự động tổng hợp.</p>
-                            <p>Khoanh đỏ chính là hệ thống danh mục báo cáo được AI tự động phân loại: Báo cáo khối lượng, Báo cáo tiến độ, Báo cáo rủi ro cung ứng vật tư. Mỗi phần đều được kết nối chặt chẽ với mô hình thiết kế 3D đầu vào.</p>
-                        </div>
-                    </div>
-                    <div class="image-side">
-                        <div class="image-side-real">
-                            <img src="/images/real/bim/toan_bo_bao_cao_ide_gravity_tao_ra.png" alt="BIM Full">
-                            <div class="image-overlay-marker" style="top: 20%; left: 10%; width: 80%; height: 60%;"></div>
-                            <div class="image-label-callout" style="top: 15%; left: 20%;">CẤU TRÚC BÁO CÁO BIM</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="slide">
-                <div class="slide-content side-by-side">
-                    <div class="text-side">
-                        <span class="module-indicator">SHOWCASE: MÔ HÌNH BIM</span>
-                        <h2>Tự Động Vẽ Sơ Đồ Hệ Thống LOGIC</h2>
-                        <div class="content-scroll">
-                            <p>Kỹ năng đỉnh cao: AI đọc dữ liệu BIM và tự động vẽ lại các sơ đồ kỹ thuật quan trọng. Trong ảnh là sơ đồ kết nối các hệ thống cơ điện MEP.</p>
-                            <p>Điều này giúp kỹ sư hiểu nhanh các nguyên lý vận hành của công trình mà không cần mở các phần mềm BIM nặng nề như Revit hay Tekla. Mọi thứ trở nên đơn giản, trực quan và cực kỳ nhanh chóng.</p>
-                        </div>
-                    </div>
-                    <div class="image-side">
-                        <div class="image-side-real">
-                            <img src="/images/real/bim/tao_so_o_he_thong.png" alt="Schema">
-                            <div class="image-overlay-marker" style="top: 25%; left: 25%; width: 50%; height: 50%;"></div>
-                            <div class="image-label-callout" style="top: 20%; left: 30%;">VẼ SƠ ĐỒ TỰ ĐỘNG</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="slide">
-                <div class="slide-content side-by-side invert">
-                    <div class="text-side">
-                        <span class="module-indicator">SHOWCASE: MÔ HÌNH BIM</span>
-                        <h2>Trực Quan Hóa Báo Cáo Khối Lượng</h2>
-                        <div class="content-scroll">
-                            <p>Báo cáo không chỉ có chữ. AI tự động vẽ các biểu đồ (Charts) để báo cáo tình hình dự án. Trong ảnh là biểu đồ phân tích dự trữ vật tư tại kho hiện trường.</p>
-                            <p>Việc trực quan hóa này giúp ban quản lý nhận diện ngay các rủi ro: "Vật tư đang thiếu hụt cho hạng mục thi công tuần tới", từ đó đưa ra quyết định nhập hàng kịp thời, tránh trễ tiến độ dự án.</p>
-                        </div>
-                    </div>
-                    <div class="image-side">
-                        <div class="image-side-real">
-                            <img src="/images/real/bim/tao_ra_bieu_o.png" alt="Charts">
-                            <div class="image-overlay-marker" style="top: 25%; left: 25%; width: 50%; height: 50%;"></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="slide">
-                <div class="slide-content side-by-side">
-                    <div class="text-side">
-                        <span class="module-indicator">SHOWCASE: MÔ HÌNH BIM</span>
-                        <h2>Xuất File Microsoft Word Chuẩn Sếp Ký</h2>
-                        <div class="content-scroll">
-                            <p>Đây là thành phẩm cuối cùng: Một tệp `.docx` (Microsoft Word) được Antigravity kiến tạo hoàn mỹ. Không cần chỉnh sửa font chữ, không cần kẻ bảng thủ công.</p>
-                            <p>AI tự chèn tiêu đề chuẩn văn phòng, lập bảng khối lượng, chèn hình ảnh minh họa trích xuất từ BIM và viết các đoạn phân tích kỹ thuật sắc sảo. Một báo cáo BIM chất lượng 10/10 chỉ mất 5 phút thực thi.</p>
-                        </div>
-                    </div>
-                    <div class="image-side">
-                        <div class="image-side-real">
-                            <img src="/images/real/bim/file_docx_uoc_anti_gravity_lam.png" alt="Final Word">
-                            <div class="image-overlay-marker" style="top: 5%; left: 5%; width: 90%; height: 90%;"></div>
-                            <div class="image-label-callout" style="top: 2%; left: 10%;">THÀNH PHẨM REPORT .DOCX</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">PHẦN 3: CÁCH DÙNG NÂNG CAO</span>
-                    <h2>Tầm Nhìn Người Dùng Thành Thạo</h2>
-                    <div class="content-scroll">
-                        <p>Chào mừng bạn đến với phần chuyên sâu hơn. Ở đây, chúng ta dùng Anti Gravity để tự động hóa mọi thứ cho mình.</p>
-                        <div class="detail-card">
-                            <h4>🚀 Chuyển đổi tư duy:</h4>
-                            <p>Từ <strong>"Tôi phải làm gì với AI?"</strong> sang <strong>"Hệ thống AI này sẽ tự giải quyết bài toán này như thế nào?"</strong>. Bạn sẽ học cách xây dựng hạ tầng tri thức bền vững cho doanh nghiệp.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CHƯƠNG 17: CẤU TRÚC TRI THỨC PHÂN TẦNG -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">CHƯƠNG 17: KNOWLEDGE ARCHITECTURE</span>
-                    <h2>Cấu Trúc Tri Thức Phân Tầng (Hierarchical RAG)</h2>
-                    <div class="content-scroll">
-                        <p>Dữ liệu doanh nghiệp là một mớ hỗn độn? Expert sẽ quy hoạch chúng thành các tầng tri thức logic mà AI có thể 'nuốt' trôi chảy:</p>
-                        <ul class="bullet-list">
-                            <li><strong>Tầng 1 (Core Knowledge):</strong> Quy chuẩn quốc gia, luật điện lực, tiêu chuẩn ngành.</li>
-                            <li><strong>Tầng 2 (Organizational Memory):</strong> SOP công ty, lịch sử dự án, báo cáo sự cố cũ.</li>
-                            <li><strong>Tầng 3 (Project Specific):</strong> Bản vẽ hiện hành, hợp đồng thầu, biên bản nghiệm thu.</li>
-                        </ul>
-                        <p>Bằng cách này, AI sẽ luôn trả lời với bối cảnh chuẩn xác nhất cho từng cấp độ công việc.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CHƯƠNG 18: IROF NÂNG CAO -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">CHƯƠNG 18: PROMPT ENGINEERING</span>
-                    <h2>IROF Nâng Cao: Làm Chủ Những Chuỗi Lệnh Phức Tạp</h2>
-                    <div class="content-scroll">
-                        <p>Vượt qua những câu hỏi ngắn, bạn sử dụng công thức <strong>IROF</strong> để tạo ra các kết quả bền bỉ:</p>
-                        <div class="grid-2">
-                            <div class="detail-card">
-                                <h4>🛠️ Instructions & Role</h4>
-                                <p>Thiết lập vai trò 'Chuyên gia pháp lý 20 năm kinh nghiệm' với các ràng buộc đạo đức và phương pháp luận nghiêm ngặt.</p>
-                            </div>
-                            <div class="detail-card">
-                                <h4>📊 Output & Feedback</h4>
-                                <p>Yêu cầu kết quả dưới dạng bảng so sánh, biểu đồ Markdown hoặc file JSON để máy tính khác có thể đọc được.</p>
-                            </div>
-                        </div>
-                        <p><strong>Chain-of-Thought:</strong> Ép AI phải 'Suy nghĩ từng bước' để giải quyết các bài toán kỹ thuật hóc búa nhất.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CHƯƠNG 19: MULTI-AGENT -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">CHƯƠNG 19: MULTI-AGENT</span>
-                    <h2>Xây Dựng Đội Ngũ Nhân Sự Số (Multi-Agents)</h2>
-                    <div class="content-scroll">
-                        <p>Bạn không dùng Anti Gravity như một công cụ đơn lẻ, mà xây dựng một <strong>Đội ngũ hỗ trợ</strong> phối hợp đồng bộ. Hệ thống cho phép bạn thiết lập các "Trợ lý số" có vai trò và nhiệm vụ riêng biệt:</p>
-                        <div class="grid-2">
-                            <div class="detail-card">
-                                <h4>🤖 Agent Giám Sát (Supervisor Agent)</h4>
-                                <p>Đóng vai trò điều phối, nhận yêu cầu tổng thể từ người dùng và phân chia nhiệm vụ cho các Agent cấp dưới. Nó kiểm tra kết quả giữa chừng và đảm bảo tính nhất quán của toàn bộ luồng công việc.</p>
-                            </div>
-                            <div class="detail-card">
-                                <h4>🛠️ Agent Thực Thi (Worker Agents)</h4>
-                                <p>Các Agent chuyên môn hóa: Agent Pháp chế (đọc luật), Agent Kỹ thuật (đọc bản vẽ), Agent Tài chính (tính toán NPV/IRR). Chúng làm việc song song để giải quyết bài toán đa chiều phức tạp.</p>
-                            </div>
-                        </div>
-                        <p><strong>Workflow Orchestration:</strong> Bạn có thể thiết lập chuỗi hành động: "Sau khi Agent A tóm tắt xong biên bản, Agent B hãy tự động lập dự toán và Agent C soạn email thông báo cho đối tác".</p>
-                    </div>
-                </div>
-            </section>
-            <section class="slide">
-                <div class="slide-content side-by-side">
-                    <div class="text-side">
-                        <span class="module-indicator">CHƯƠNG 20: DATA ENGINEERING</span>
-                        <h2>Hệ Thống RAG Đa Tầng & Cơ Chế Kiểm Soát "Độ Trung Thực"</h2>
-                        <div class="content-scroll">
-                            <p>Người dùng thông minh không bao giờ dừng lại ở việc 'hỏi-đáp'. Bạn cần thiết kế hệ thống tìm kiếm thông minh để đảm bảo thông tin chính xác:</p>
-                            <div class="detail-card">
-                                <h4>🛠️ Cấu trúc 3 lớp bảo vệ:</h4>
-                                <ul class="bullet-list">
-                                    <li><strong>Lớp 1 - Semantic Filtering:</strong> AI sử dụng Vector Database để lọc ra đúng 0.1% dữ liệu có liên quan nhất trong hàng triệu trang tài liệu.</li>
-                                    <li><strong>Lớp 2 - Cross-Referencing:</strong> Cơ chế tự đối soát (Hybrid Search) kết hợp từ khóa chính xác và ngữ nghĩa để đảm bảo các mã hiệu kỹ thuật, thông tư pháp lý không bị nhầm lẫn.</li>
-                                    <li><strong>Lớp 3 - Re-Ranking:</strong> Sử dụng các mô hình ngôn ngữ mạnh nhất (LLM) để xếp hạng lại độ ưu tiên của thông tin trước khi đưa vào cửa sổ xử lý (Context window).</li>
-                                </ul>
-                            </div>
-                            <p><strong>Bí quyết thành thạo:</strong> Thiết lập cơ chế kiểm tra định kỳ cho thư viện dữ liệu để loại bỏ các tài liệu hết hạn, giữ cho hệ thống luôn cập nhật nhất.</p>
-                        </div>
-                    </div>
-                    <div class="image-side">
-                        <div class="image-side-real">
-                            <img src="/images/expert/knowledge_graph.png" alt="Knowledge Graph AI">
-                            <div class="image-overlay-marker" style="top: 30%; left: 30%; width: 40%; height: 40%;"></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">CHƯƠNG 21: AGENTIC CODING</span>
-                    <h2>Năng Lực Phân Tích Thực Thi (Python Runtime Engine)</h2>
-                    <div class="content-scroll">
-                        <p>Sức mạnh thực sự của Anti Gravity nằm ở khả năng <strong>tự lập trình và thực hiện tính toán</strong>. Thay vì ngồi tính toán trên Excel, bạn ra lệnh để Anti Gravity viết các script Python chuyên sâu:</p>
-                        <div class="grid-2">
-                            <div class="detail-card">
-                                <h4>📊 Phân Tích Dữ Liệu Kỹ Thuật (Big Data)</h4>
-                                <ul class="bullet-list">
-                                    <li><strong>Dispersion Analysis:</strong> Tự động tính toán độ phân tán dòng điện chuỗi PV dựa trên hàng tỷ bản ghi SCADA để tìm ra các tấm pin bị lỗi ngầm.</li>
-                                    <li><strong>Statistical Modeling:</strong> Chạy các mô hình Monte Carlo để dự báo sản lượng điện dựa trên các kịch bản thời tiết cực đoan.</li>
-                                    <li><strong>Data Cleaning:</strong> Tự động xử lý nhiễu dữ liệu từ các cảm biến IoT bị lỗi trước khi đưa vào báo cáo.</li>
-                                </ul>
-                            </div>
-                            <div class="detail-card">
-                                <h4>📈 Trực Quan Hóa Đồ Họa Master</h4>
-                                <ul class="bullet-list">
-                                    <li>Vẽ các bản đồ nhiệt (Heatmaps) về phân bổ nhiệt độ máy biến áp.</li>
-                                    <li>Tạo biểu đồ xu hướng (Trendlines) và dự báo điểm hỏng hóc (Failure point prediction).</li>
-                                    <li>Xuất bản Dashboard HTML tương tác trực tiếp từ dữ liệu thô (.csv, .xlsx).</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <p><strong>Triết lý Kỹ sư 4.0:</strong> Không cần giỏi code, chỉ cần giỏi tư duy logic để điều khiển AI code cho mình.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">CHƯƠNG 22: BẢN ĐỒ THÔNG MINH</span>
-                    <h2>Anti Gravity Với Bản Đồ & Quản Lý Tài Sản</h2>
-                    <div class="content-scroll">
-                        <p>Kết nối tọa độ thực tế vào hệ thống để giám sát hạ tầng. Bạn ứng dụng công cụ bản đồ vào 3 trụ cột:</p>
-                        <div class="detail-card">
-                            <h4>🗺️ Ứng dụng GIS Chuyên Sâu:</h4>
-                            <p>- **Pathing Optimization:** Tự động quy hoạch tuyến đường dây dẫn, trạm sạc xe điện tối ưu dựa trên mật độ dân cư và địa hình VN2000.
-                            <br>- **Drone Vision Integration:** AI tự động quét ảnh flycam, nhận diện các điểm xâm lấn hành lang an toàn lưới điện và tag ngay tọa độ lên Google Earth.
-                            <br>- **Asset Health Mapping:** Hiển thị trực quan trạng thái vận hành của hàng nghìn trạm biến áp trên bản đồ nhiệt thời gian thực.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="slide">
-                <div class="slide-content side-by-side">
-                    <div class="text-side">
-                        <span class="module-indicator">CHƯƠNG 23: INDUSTRIAL IOT</span>
-                        <h2>Bản Sao Số (Digital Twin) & Vận Hành Tự Chủ</h2>
-                        <div class="content-scroll">
-                            <p>Xóa mù Digital Twin: Đây là việc phản chiếu 1-1 giữa thiết bị vật lý và mô hình số. Bạn không chỉ nhìn, mà còn <strong>dự báo</strong>:</p>
-                            <ul class="bullet-list">
-                                <li><strong>Pre-failure Alert:</strong> AI nhận diện các rung động nhỏ nhất từ cảm biến IoT để cảnh báo sự cố vòng bi động cơ trước khi nó bốc cháy.</li>
-                                <li><strong>Virtual Commissioning:</strong> Chạy thử nghiệm các phương án vận hành trên bản sao số trước khi áp dụng thực tế để tránh rủi ro mất điện.</li>
-                                <li><strong>BIM Fusion:</strong> Nhấn vào hình ảnh 3D của biến áp trên iPad để xem ngay lịch sử bảo trì và các thông số hiện thời của nó.</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="image-side">
-                        <div class="image-side-real">
-                            <img src="/images/expert/digital_twin.png" alt="Industrial Digital Twin">
-                            <div class="image-overlay-marker" style="top: 20%; left: 20%; width: 60%; height: 60%;"></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">CHƯƠNG 24: PROCUREMENT</span>
-                    <h2>Đấu Thầu Chiến Lược & Phân Tích TCO Nâng Cao</h2>
-                    <div class="content-scroll">
-                        <p>Bạn biến Ban Đấu thầu thành trung tâm tạo ra giá trị nhờ <strong>cách tìm nguồn hàng thông minh</strong>:</p>
-                        <div class="detail-card">
-                            <h4>💰 Phân tích Tổng chi phí sở hữu (TCO):</h4>
-                            <p>Thay vì chọn bên rẻ nhất, AI tính toán: [Giá mua] + [Chi phí vận hành 20 năm] + [Rủi ro hỏng hóc] để tìm ra nhà cung cấp thực sự hiệu quả. AI tự động bóc tách sai lệch khối lượng giữa bản vẽ và chào giá (BOQ Audit) với tốc độ hàng vạn dòng/phút.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">CHƯƠNG 25: ASSET MGMT</span>
-                    <h2>Hệ Thống RCM: Bảo Trì Tập Trung Vào Độ Tin Cậy</h2>
-                    <div class="content-scroll">
-                        <p>Vượt qua bảo trì định kỳ lạc hậu, bạn triển khai <strong>Bảo trì tập trung vào độ tin cậy</strong>:</p>
-                        <ul class="bullet-list">
-                            <li><strong>Phân tích DGA dầu biến áp:</strong> AI đóng vai trò chuyên gia hóa nghiệm, tự động chẩn đoán nguy cơ phóng điện cục bộ theo tiêu chuẩn IEEE/IEC chuyên sâu.</li>
-                            <li><strong>MTBF Optimization:</strong> Tính toán chính xác thời gian giữa các lần hỏng hóc để cắt giảm 40% chi phí lưu kho phụ tùng không cần thiết.</li>
-                            <li><strong>Root Cause Analysis (RCA):</strong> Tự động truy hồi 48h lịch sử vận hành để tìm ra 'Kẻ thủ ác' gây sự cố truyền tải chỉ trong tích tắc.</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CHƯƠNG 30: ESG & GREEN FINANCE -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">CHƯƠNG 30: ESG & GREEN FINANCE</span>
-                    <h2>ESG Reporting & Chiến Lược Carbon Digitalization</h2>
-                    <div class="content-scroll">
-                        <p>Anti Gravity biến các con số điện năng khô khan thành <strong>Kết quả thực tế</strong>. Bạn sử dụng hệ thống để tự động hóa toàn diện báo cáo ESG:</p>
-                        <div class="grid-2">
-                            <div class="detail-card">
-                                <h4>🌿 Real-time Emission Tracking</h4>
-                                <ul class="bullet-list">
-                                    <li><strong>GHG Protocol Alignment:</strong> AI tự động phân loại phát thải theo Scope 1, 2, và 3 dựa trên dữ liệu ERP và hóa đơn điện tử.</li>
-                                    <li><strong>Carbon Offset Calculation:</strong> Tính toán chính xác lượng CO2 giảm thiểu từ các dự án RE (Renewable Energy) theo phương pháp luận Gold Standard hoặc VCS.</li>
-                                </ul>
-                            </div>
-                            <div class="detail-card">
-                                <h4>📈 Green Capital Access</h4>
-                                <ul class="bullet-list">
-                                    <li><strong>Sustainable Finance:</strong> Tự động xuất bản hồ sơ minh bạch để tiếp cận các nguồn vốn vay ưu đãi (Green Bonds) từ các tổ chức tài chính quốc tế như ADB, WB.</li>
-                                    <li><strong>CBAM Compliance:</strong> Chuẩn bị sẵn sàng các báo cáo kiểm kê khí nhà kính cho hàng hóa xuất khẩu sang EU, tránh thuế carbon biên giới.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">CHƯƠNG 31: FINANCE AI</span>
-                    <h2>Financial Engineering & Virtual CFO Operations</h2>
-                    <div class="content-scroll">
-                        <p>AI không chỉ làm kế toán, AI thực hiện <strong>Financial Engineering</strong> để tối ưu hóa dòng tiền cho doanh nghiệp năng lượng:</p>
-                        <div class="detail-card">
-                            <h4>💎 Tầm nhìn Virtual CFO:</h4>
-                            <p>- **Algorithmic Stress Testing:** "Nếu tỷ giá hối đoái biến động 5% và giá FIT thay đổi, Net Present Value (NPV) của dự án sẽ bị ảnh hưởng thế nào?". AI chạy hàng nghìn giả lập Monte Carlo để đưa ra lời giải quản trị rủi ro ngay lập tức.
-                            <br>- **Dynamic Payback Analysis:** Tự động dự báo thời điểm hoàn vốn thực tế dựa trên sản lượng điện và biến phí vận hành (OPEX) cập nhật mỗi giây.
-                            <br>- **Automated Capex Audit:** Đối soát chi phí đầu tư thiết bị thực tế với dự toán thầu ban đầu để phát hiện các khoản 'rò rỉ' tài chính lên đến hàng tỷ đồng.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CHƯƠNG 32: HR & TRAINING -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">CHƯƠNG 32: HR & TRAINING</span>
-                    <h2>Đào Tạo Nhân Nhân Sự Số (Training & Development)</h2>
-                    <div class="content-scroll">
-                        <p>Bạn sử dụng Anti Gravity để giải quyết bài toán đào tạo nhân sự. Khi nhân viên mới vào, họ sẽ trao đổi với <strong>Trợ lý hướng dẫn</strong>:</p>
-                        <p>- Agent này được "học" từ tất cả các quy trình SOP và kinh nghiệm xử lý lỗi của người đi trước.<br>- Hệ thống sẽ đánh giá năng lực của nhân sự qua các bài kiểm tra thực tế trên AI Sandbox.<br>- **Micro-learning:** AI tự động đề xuất các khóa học bổ trợ cho nhân sự dựa trên những lỗ hổng kiến thức phát hiện được trong quá trình làm việc hàng ngày.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CHƯƠNG 33: COMPLIANCE & SECURITY -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">CHƯƠNG 33: COMPLIANCE & SECURITY</span>
-                    <h2>Kỷ Nguyên Bảo Mật "Zero Trust" & Pháo Đài Tri Thức Private RAG</h2>
-                    <div class="content-scroll">
-                        <p>Trong kỷ nguyên mới, dữ liệu chính là sinh mệnh. Bạn cần thiết kế hệ thống bảo vệ đa lớp để bảo vệ tài sản của doanh nghiệp:</p>
-                        <div class="detail-card">
-                            <h4>🛡️ Kiến trúc bảo mật 3 lớp:</h4>
-                            <ul class="bullet-list">
-                                <li><strong>Private RAG (Offline First):</strong> Toàn bộ dữ liệu nhạy cảm được xử lý trên máy chủ nội bộ. AI học và truy xuất hoàn toàn không cần kết nối Internet, đảm bảo bí mật quốc gia và kinh doanh tuyệt đối.</li>
-                                <li><strong>Data Masking & PII Redaction:</strong> Tự động nhận diện và ẩn đi các thông tin cá nhân, số tài khoản, hoặc thông số kỹ thuật mật trước khi dữ liệu được đưa vào quá trình phân tích chung.</li>
-                                <li><strong>Audit Log AI Monitoring:</strong> Sử dụng một Agent giám sát riêng biệt để kiểm tra mọi câu lệnh (prompts) của nhân viên, phát hiện sớm các nỗ lực truy cập trái phép hoặc dò rỉ thông tin (Prompt Injection Detection).</li>
-                            </ul>
-                        </div>
-                        <p><strong>Triết lý người dùng thành thạo:</strong> Bảo mật không phải là rào cản, mà là nền tảng để hệ thống có thể học những dữ liệu quý giá của công ty.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CHƯƠNG 34: MARKETING & COMMUNICATION -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">CHƯƠNG 34: MARKETING & TRUYỀN THÔNG</span>
-                    <h2>Tiến Hóa Giao Tiếp: Tạo Uy Tín Với Anti Gravity</h2>
-                    <div class="content-scroll">
-                        <p>Expert không dùng AI để viết bài quảng cáo hời hợt. Bạn dùng AI để xây dựng vị thế <strong>Dẫn đầu tư tưởng (Thought Leadership)</strong> trong ngành:</p>
-                        <div class="grid-2">
-                            <div class="detail-card">
-                                <h4>🏛️ Technical Authority</h4>
-                                <p>- **Whitepapers:** Tự động tổng hợp dữ liệu dự án thành các báo cáo chuyên sâu, định hình xu hướng thị trường.
-                                <br>- **Case Studies:** Biến các sự cố kỹ thuật đã xử lý thành bài học thành công có sức thuyết phục cao với đối tác.</p>
-                            </div>
-                            <div class="detail-card">
-                                <h4>✉️ Hyper-Personalization</h4>
-                                <p>Tự động soạn thảo kịch bản đối ngoại cho từng sếp bên phía đối tác, dựa trên lịch sử hợp tác, tâm lý luận và bối cảnh kinh tế thực tế, đảm bảo tỷ lệ phản hồi > 90%.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CHƯƠNG 35: SYSTEM INTERFACE -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">CHƯƠNG 35: SYSTEM INTERFACE</span>
-                    <h2>Kiến Trúc Unified Namespace (UNS): Kết Nối SCADA-BIM-ERP</h2>
-                    <div class="content-scroll">
-                        <p>Cấp độ thành thạo cao nhất là kết nối mọi nguồn dữ liệu vào một hệ thống duy nhất. Đây là kiến trúc <strong>Truyền thông tin tự động</strong>:</p>
-                        <div class="detail-card">
-                            <h4>🔗 Chuỗi phản ứng tự động (Autonomous Workflow):</h4>
-                            <p><strong>1. Phát hiện:</strong> SCADA báo lỗi quá nhiệt tại máy biến áp T1.<br>
-                            <strong>2. Định vị:</strong> AI link sang mô hình BIM 3D, chỉ điểm chính xác vị trí thiết bị và link tới video hướng dẫn tháo lắp.<br>
-                            <strong>3. Đối soát vật tư:</strong> AI kiểm tra ERP xem phụ tùng thay thế còn trong kho không và tự động tạo yêu cầu mua hàng nếu hết.<br>
-                            <strong>4. Điều phối:</strong> Tự động soạn Ticket kỹ thuật điều động kỹ sư gần nhất đến hiện trường kèm theo đầy đủ hồ sơ kỹ thuật.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CHƯƠNG 36: OPERATION EXCELLENCE -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">CHƯƠNG 36: OPERATION EXCELLENCE</span>
-                    <h2>Chiến Lược O&M Tập Trung Vào Trí Tuệ AI (Autonomous O&M)</h2>
-                    <div class="content-scroll">
-                        <p>Vận hành không còn là trực 24/7. Bạn là người quản lý các <strong>Hệ thống tự động</strong>:</p>
-                        <ul class="bullet-list">
-                            <li><strong>Dynamic Maintenance:</strong> Thay vì bảo trì theo định kỳ 6 tháng, AI ra lệnh bảo trì dựa trên 'tình trạng sức khỏe thực' của thiết bị (Health Index), tiết kiệm 30% chi phí nhân công.</li>
-                            <li><strong>Self-healing Grid:</strong> AI tự động tính toán các phương thức kết lưới tối ưu để giảm tổn thất điện năng theo thời gian thực khi có biến động tải.</li>
-                            <li><strong>Remote Support AR:</strong> Tích hợp tri thức AI vào kính thông minh (AR) để chuyên gia từ xa có thể cầm tay chỉ việc cho kỹ sư hiện trường qua các lớp thông tin ảo overlay trực tiếp trên thiết bị thực.</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CHƯƠNG 37: STRATEGIC PLANNING -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">CHƯƠNG 37: STRATEGIC PLANNING</span>
-                    <h2>Hoạch Định Chiến Lược 5 Năm Với AI Simulations</h2>
-                    <div class="content-scroll">
-                        <p>Sử dụng trí tuệ nhân tạo để nhìn thấu tương lai thông qua các <strong>Giả thiết thị trường phức tạp</strong>:</p>
-                        <div class="detail-card">
-                            <h4>📊 Mô phỏng tăng trưởng:</h4>
-                            <p>- **Monte Carlo Pathfinding:** Chạy 10.000 kịch bản biến động giá điện và lãi suất để tìm ra danh mục đầu tư (Solar vs Wind vs Storage) có tỷ suất hoàn vốn (IRR) cao nhất.
-                            <br>- **Human Resource Forecasting:** AI phân tích tốc độ phát triển dự án để dự báo chính xác số lượng và kỹ năng nhân sự cần đào tạo trước 2 năm.
-                            <br>- **Policy Impact Analysis:** Tự động quét các dự thảo luật mới nhất để cảnh báo rủi ro hoặc cơ hội sớm cho ban hội đồng quản trị.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CHƯƠNG 38: AI IN GRID STABILITY -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">CHƯƠNG 38: SPECIAL TOPIC</span>
-                    <h2>AI Trong Ổn Định Lưới Điện & Chất Lượng Điện Năng</h2>
-                    <div class="content-scroll">
-                        <p>Khi năng lượng tái tạo chiếm tỷ trọng lớn, lưới điện đối mặt với nguy cơ mất ổn định. Bạn sử dụng Anti Gravity làm <strong>Bộ não điều hòa</strong>:</p>
-                        <ul class="bullet-list">
-                            <li><strong>Harmonic Analysis:</strong> AI phân tích sóng hài sâu và điều khiển các bộ Inverter thông minh để lọc nhiễu tự động, đảm bảo chất lượng điện áp chuẩn 100%.</li>
-                            <li><strong>Frequency Prediction:</strong> Dự báo các cú sụt tần số trong mili-giây do đám mây che khuất hoặc gió lặng để kích hoạt bộ lưu trữ ESS bù công suất tức thời.</li>
-                            <li><strong>Stability Margin:</strong> Luôn tính toán giới hạn ổn định tĩnh và động của hệ thống để ngăn chặn các sự cố rã lưới diện rộng (Blackout).</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CHƯƠNG 39: CONTRACTUAL FORENSICS -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">CHƯƠNG 39: LEGAL AI</span>
-                    <h2>Contractual Forensics: Pháp Y Hợp Đồng & Hồ Sơ Hoàn Công</h2>
-                    <div class="content-scroll">
-                        <p>Bạn hoàn thành dự án nhàn nhã nhờ sự kiểm tra kỹ lưỡng của trợ lý pháp lý. Hệ thống sẽ tự động thực hiện <strong>Kiểm tra hồ sơ</strong>:</p>
-                        <div class="detail-card">
-                            <h4>🔍 Sàng lọc 100% sai sót:</h4>
-                            <ul class="bullet-list">
-                                <li>Kiểm tra sự khớp lệch giữa BOM (Bill of Materials), bản vẽ hoàn công và biên bản nghiệm thu hiện trường.</li>
-                                <li>Phát hiện các chứng chỉ CO/CQ giả mạo hoặc hết hạn thông qua kết nối dữ liệu nhà cung cấp toàn cầu.</li>
-                                <li>Tự động bóc tách các điều khoản "cài cắm" rủi ro trong hợp đồng thầu phụ có thể gây tranh chấp pháp lý sau này.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CHƯƠNG 40: GREEN HYDROGEN -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">CHƯƠNG 40: INNOVATION</span>
-                    <h2>Green Hydrogen: Tối Ưu Hóa Nền Kinh Tế Năng Lượng Mới</h2>
-                    <div class="content-scroll">
-                        <p>Hydro xanh là tương lai, và AI là chìa khóa để <strong>Thương mại hóa hiệu quả</strong>:</p>
-                        <p>- **Electrolyzer Life-cycle AI:** Dự báo tuổi thọ màng ngăn điện phân để lên lịch bảo trì tối ưu, giảm chi phí sản xuất Hydro xuống mức cạnh tranh với nhiên liệu hóa thạch.
-                        <br>- **Supply-Demand Matching:** AI điều phối nguồn điện dư thừa từ Renewables vào sản xuất Hydro tại thời điểm giá điện thấp nhất trong ngày.
-                        <br>- **Digital Product Passport:** Tự động tạo "Hộ chiếu số" cho mỗi kg Hydro xanh, chứng minh nguồn gốc 100% tái tạo để xuất khẩu sang các thị trường khó tính như EU.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CHƯƠNG 41: M&A DUE DILIGENCE -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">CHƯƠNG 41: INVESTMENT AI</span>
-                    <h2>M&A Virtual Due Diligence: Thẩm Định Đầu Tư Thần Tốc</h2>
-                    <div class="content-scroll">
-                        <p>Bạn muốn mua lại một trang trại điện/nhà máy? Anti Gravity giúp bạn thực hiện <strong>Thẩm định nhanh chóng</strong>:</p>
-                        <ul class="bullet-list">
-                            <li><strong>Technical Due Diligence:</strong> Phân tích 10 năm dữ liệu vận hành để tìm ra các lỗi ẩn (như suy hao PID của pin mặt trời) mà chủ cũ đang che giấu.</li>
-                            <li><strong>Legal Due Diligence:</strong> Quét hàng nghìn trang hồ sơ đất đai, GPXD để chỉ ra các rủi ro pháp lý 'tử huyệt'.</li>
-                            <li><strong>Financial Valuation:</strong> Xây dựng mô hình định giá động (Dynamic Valuation) dựa trên các kịch bản lãi suất và chính sách giá FIT mới nhất.</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CHƯƠNG 42: SMART CITY -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">CHƯƠNG 42: SMART INFRASTRUCTURE</span>
-                    <h2>Hạ Tầng Đô Thị Thông Minh (Smart City Operating System)</h2>
-                    <div class="content-scroll">
-                        <p>Người dùng thành thạo kết nối hạ tầng năng lượng vào hệ sinh thái đô thị. AI đóng vai trò <strong>Trung tâm điều phối</strong>:</p>
-                        <div class="detail-card">
-                            <h4>🌆 Đô thị tương lai:</h4>
-                            <p>- **V2G (Vehicle-to-Grid):** AI điều phối hàng vạn xe điện giải phóng năng lượng ngược lại lưới vào giờ cao điểm, biến xe điện thành các "Trạm phát điện di động".
-                            <br>- **Microgrid Resilience:** Tự động hóa việc vận hành các cụm dân cư tự cung tự cấp, đảm bảo bệnh viện và trung tâm dữ liệu luôn có điện dù lưới điện quốc gia gặp sự cố.
-                            <br>- **An ninh năng lượng số:** AI giám sát và ngăn chặn các cuộc tấn công mạng nhắm vào hạ tầng điện đô thị.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CHƯƠNG 43: CUSTOM LLM -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">CHƯƠNG 43: CORE TECHNOLOGY</span>
-                    <h2>Làm Chủ Công Nghệ: Tự Tạo Anti Gravity Cho Bạn</h2>
-                    <div class="content-scroll">
-                        <p>Người dùng thông minh không hài lòng với các AI thông thường. Bạn có thể 'huấn luyện' để Anti Gravity hiểu đúng ý bạn:</p>
-                        <div class="grid-2">
-                            <div class="detail-card">
-                                <h4>🛠️ Instruction Fine-tuning</h4>
-                                <p>Thiết lập các bộ 'System Prompts' siêu cấp, biến AI thành chuyên gia pháp lý hiểu rõ mọi kẽ hở của luật điện lực hoặc chuyên gia kỹ thuật thuộc lòng từng chi tiết máy Siemens.</p>
-                            </div>
-                            <div class="detail-card">
-                                <h4>🧠 Private Brains</h4>
-                                <p>Xây dựng các 'Local LLMs' (Large Language Models nội bộ) để bảo mật tri thức lõi và tối ưu hóa chi phí vận hành AI ở quy mô lớn.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CHƯƠNG 44: ZERO EMISSION -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">CHƯƠNG 44: SUSTAINABILITY</span>
-                    <h2>Lộ Trình Net-Zero 2050: Dẫn Dắt Bằng Dữ Liệu</h2>
-                    <div class="content-scroll">
-                        <p>Dùng Anti Gravity để thực thi sứ mệnh xanh. Bạn là người biến các cam kết chính trị thành <strong>Con số kết quả thật</strong>: </p>
-                        <ul class="bullet-list">
-                            <li><strong>Decarbonization Roadmap:</strong> AI phân tích toàn bộ chuỗi cung ứng và đề xuất lộ trình cắt giảm phát thải tốn ít chi phí nhất.</li>
-                            <li><strong>Circular Economy AI:</strong> Tối ưu hóa việc tái sử dụng linh kiện, pin mặt trời cũ thông qua mạng lưới kết nối cung - cầu thông minh.</li>
-                            <li><strong>CBAM Mastery:</strong> Tự động xuất bản báo cáo tuân thủ cơ chế biên giới Carbon của EU, giữ vững khả năng cạnh tranh quốc tế.</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CHƯƠNG 45: AI-READY CULTURE -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">CHƯƠNG 45: CÁCH LÀM VIỆC MỚI</span>
-                    <h2>Văn Hóa Mới: Sức Mạnh Khi Có Anti Gravity</h2>
-                    <div class="content-scroll">
-                        <p>Đỉnh cao của quản trị là xây dựng một đội ngũ <strong>Augmented Humans</strong> (Người được tăng cường sức mạnh AI):</p>
-                        <div class="detail-card">
-                            <h4>🧠 Thay đổi tư duy quản trị:</h4>
-                            <p>- **KPI mới:** Không đánh giá nhân viên bằng tốc độ làm việc tay chân, mà bằng khả năng thiết kế và điều phối các Agent AI vận hành công việc.
-                            <br>- **Human-AI Synergy:** Con người rời bỏ công việc lặp lại để tập trung vào Sáng tạo, Đạo đức và Quyết định chiến lược vĩ mô.
-                            <br>- **AI Sandbox:** Khuyến khích văn hóa thử nghiệm, cho phép nhân viên tự huấn luyện các Agent nhỏ cho nhu cầu cá nhân.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CHƯƠNG 46: ETHICS & SAFETY -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">CHƯƠNG 46: BẢO MẬT & ĐẠO ĐỨC</span>
-                    <h2>Đạo Đức AI & Trách Nhiệm Thủ Lĩnh Số</h2>
-                    <div class="content-scroll">
-                        <p>Quyền năng lớn đi kèm trách nhiệm cao. Người dùng Anti Gravity cần chú ý đến <strong>Sự tin cậy</strong>:</p>
-                        <ul class="bullet-list">
-                            <li><strong>Algorithmic Fairness:</strong> Đảm bảo AI không đưa ra các quyết định thiên kiến, bất công đối với nhà thầu hoặc nhân sự dựa trên dữ liệu cũ có định kiến.</li>
-                            <li><strong>Transparency & Traceability:</strong> Mọi kết luận của AI phải có nguồn gốc rõ ràng, giải thích được lý do (Explainable AI - XAI).</li>
-                            <li><strong>Knowledge Sovereignty:</strong> Bảo vệ chủ quyền tri thức của doanh nghiệp trước sự xâm lấn và thu thập trái phép của các nền tảng ngoại bang.</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CHƯƠNG 47: FUTURE VISION -->
-            <section class="slide">
-                <div class="slide-content side-by-side">
-                    <div class="text-side">
-                        <span class="module-indicator">CHƯƠNG 47: TẦM NHÌN 2030+</span>
-                        <h2>Kỷ Nguyên Tự Chủ: Đại Dương Xanh Của Trí Tuệ</h2>
-                        <div class="content-scroll">
-                            <p>Anti Gravity không chỉ là công cụ, nó là <strong>Giải pháp</strong> cho một nền văn minh năng lượng mới:</p>
-                            <div class="detail-card">
-                                <h4>🚀 Viễn cảnh 2030+:</h4>
-                                <p>- **Autonomous Energy Grid:** Lưới điện tự hồi phục và tự cân bằng thông minh 100% bằng AI.
-                                <br>- **Digital Green Hub:** Việt Nam trở thành trung tâm dữ liệu xanh và tri thức AI của khu vực Đông Nam Á.
-                                <br>- **Creative Renaissance:** Con người hoàn toàn thoát khỏi công việc phiền toái để tái sinh năng lực sáng tạo vô hạn.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="image-side">
-                        <div class="image-side-real">
-                            <img src="/images/expert/smart_grid.png" alt="Future Smart Grid">
-                            <div class="image-overlay-marker" style="top: 10%; left: 10%; width: 80%; height: 80%;"></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CHƯƠNG 48: 30-DAY ACTION PLAN -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">CHƯƠNG 48: HÀNH ĐỘNG NGAY</span>
-                    <h2>Chiến Dịch 30 Ngày Thành Thạo Anti Gravity</h2>
-                    <div class="content-scroll">
-                        <p>Kiến thức chỉ là tiềm năng. <strong>Hành động mới là sức mạnh</strong>. Đây là giao thức thực thi quân đội để bạn làm chủ hệ thống trong 30 ngày:</p>
-                        <div class="grid-2">
-                            <div class="detail-card">
-                                <h4>📅 Tuần 1-2: Kiến Tạo Hạ Tầng</h4>
-                                <p>- Gom toàn bộ tri thức phân tán vào 'Kho báu Catalogs'.
-                                <br>- Thiết lập sơ đồ tổ chức 'Phòng Lab AI' nội bộ.
-                                <br>- Huấn luyện Agent "Hỏi đáp nội quy & kỹ thuật".</p>
-                            </div>
-                            <div class="detail-card">
-                                <h4>📅 Tuần 3-4: Bùng Nổ Thực Thi</h4>
-                                <p>- Triển khai 3 Agents chủ chốt (Pháp chế - Kỹ thuật - Tài chính) giải quyết bài toán thật.
-                                <br>- Xuất bản báo cáo thành công đầu tiên cho Ban lãnh đạo.
-                                <br>- Đo lường KPI: Tiết kiệm > 70% thời gian giấy tờ.</p>
-                            </div>
-                        </div>
-                        <p style="text-align: center; font-weight: 800; color: var(--secondary); margin-top: 3rem;">HÀNH TRÌNH VẠN DẶM BẮT ĐẦU TỪ MỘT PROMPT CHUẨN XÁC!</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SLIDE 49: FINAL CHALLENGE -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <span class="module-indicator">HOÀN THÀNH BÀI TẬP CUỐI KHÓA</span>
-                    <h2 class="gradient-text" style="font-size: 3.5rem;">Trở Thành Người Dùng Thành Thạo</h2>
-                    <div class="content-scroll" style="text-align: left; max-width: 900px; margin: auto;">
-                        <p>Bước cuối cùng để khẳng định bản thân đã thoát cảnh "mù mờ" và bắt đầu làm chủ công nghệ:</p>
-                        <div class="detail-card">
-                            <p><strong>Nhiệm vụ cuối cùng:</strong> Sử dụng Antigravity để thiết lập hệ thống quản lý trọn gói cho một dự án thực tế của bạn: Từ việc quy hoạch folder tri thức -> Huấn luyện Agent phân tích -> Đến việc xuất bản báo cáo DOCX hoàn chỉnh cho sếp.</p>
-                            <p style="text-align: center; font-weight: 800; color: var(--secondary);">LÀM THẬT - NHẬN GIÁ TRỊ THẬT</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SLIDE 50: GRADUATION -->
-            <section class="slide">
-                <div class="slide-content centerpiece">
-                    <h1 class="gradient-text" style="font-size: 5rem; line-height: 1;">Chúc Mừng Bạn!</h1>
-                    <p class="subtitle" style="font-size: 1.6rem; margin: 2rem 0;">Bạn đã chính thức làm chủ được Anti Gravity.</p>
-                    <div class="content-scroll" style="text-align: center; max-width: 900px; margin: auto;">
-                        <p>Từ những khái niệm cơ bản về thư mục dữ liệu, bạn đã đi đến việc xem sơ đồ hệ thống BIM, xem file Relay và dùng Anti Gravity cho dự án thực tế. Một thế giới mới đang mở rộng vòng tay chào đón bạn.</p>
-                    </div>
-                    <div style="margin-top: 4rem; font-weight: 900; font-style: italic; color: #64748b; letter-spacing: 1px;">@ANTI GRAVITY CƠ BẢN - IPC E&C AI</div>
-                    <button class="cta-button" style="margin-top: 3rem; padding: 1.5rem 4rem; cursor: pointer; border-radius: 50px;" onclick="location.reload()">BẮT ĐẦU LẠI - TỐI ƯU HÓA HƠN</button>
-                </div>
-            </section>
-
-        </main>
-
-        <footer class="app-footer">
-            <button id="prev-btn" class="nav-btn" disabled>← TRƯỚC</button>
-            <div class="progress-bar mobile-hide"><div id="footer-progress" class="progress-fill"></div></div>
-            <button id="next-btn" class="nav-btn">SAU →</button>
-        </footer>
+            </div>
+        </div>
     </div>
-    <script type="module" src="./main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            VANTA.NET({
+                el: "#vanta-bg",
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                scale: 1.00,
+                scaleMobile: 1.00,
+                color: 0xffffff,
+                backgroundColor: 0xd4511d,
+                backgroundAlpha: 0.0,
+                points: 15.00,
+                maxDistance: 22.00,
+                spacing: 16.00,
+                showDots: true
+            });
+        });
+    </script>
 </body>
 </html>
